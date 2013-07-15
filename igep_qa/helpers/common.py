@@ -50,7 +50,7 @@ def get_hwaddr(ifname):
     except:
         return ""
 
-class TCpuinfo:
+class QCpuinfo:
     """ Helper class to parse the /proc/cpuinfo
     
     On Linux systems various information about the CPU ( or CPUs ) in the
@@ -87,7 +87,7 @@ class TCpuinfo:
         """
         return self.data[index]
 
-class TCmdline:
+class QCmdline:
     """ Helper class to parse the /proc/cmdline
 
     On Linux systems information about the kernel command line in the
@@ -112,7 +112,7 @@ class TCmdline:
             return False
         return True
 
-class TMmap:
+class QMmap:
     """ Simple helper class to read/write from/to any location in memory
 
     References:
