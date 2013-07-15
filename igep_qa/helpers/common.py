@@ -39,7 +39,7 @@ def get_hwaddr(ifname):
     """ Return the MAC address for a specific local interface.
 
     Keyword arguments:
-         - ifname : The interface name, e.g. eth0, wlan0.
+         - ifname: The interface name, e.g. eth0, wlan0.
 
     """ 
     try:
@@ -105,7 +105,7 @@ class QCmdline:
         Return True if parameter is in cmdline, otherwise returns False
 
         Keyword arguments:
-            - param : The paramater to be found.
+            - param: The paramater to be found.
 
         """
         if  (self.cmdline.find(param) == -1) :
@@ -127,7 +127,8 @@ class QMmap:
         Returns the readed value in hexadecimal format
 
         Keyword arguments:
-            addr -- The memory address to be readed
+            - addr: The memory address to be readed.
+
         """
         fd = os.open("/dev/mem", os.O_RDWR | os.O_SYNC)
         # Map one page
