@@ -15,3 +15,10 @@ MADC
 
 .. automodule:: igep_qa.helpers.madc
    :members:
+
+MODEM
+-----
+
+.. automodule:: igep_qa.helpers.modem
+   :members:
+
