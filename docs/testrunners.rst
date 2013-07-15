@@ -9,6 +9,12 @@ Test Runner, you can easily:
 * Run only the needed test cases.
 * Change the execution order of test cases.
 
+DBmysql
+-------
+
+.. automodule:: igep_qa.runners.dbmysql
+   :members:
+
 Lightly
 -------
 
