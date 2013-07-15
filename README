@@ -1,0 +1,36 @@
+IGEP-QA
+=======
+
+This is overall test software for IGEP Technology based devices, which defines
+test scope, test strategy, test configurations as well as test execution cycles.
+It will give readers an overview of validation activities done in any IGEP
+Technology based devices. It will be the joint effort from IGEP community.
+
+Objectives
+==========
+
+Objectives is to validate the functionality of entire hardware and software by
+performing different types of tests.
+
+At this moment, the implementation includes:
+
+* Functional Tests
+* Stress Tests
+
+Installation
+============
+
+Just get it:
+
+.. code-block:: none
+
+      pip install simpleai
+
+You will need to have pip installed on your system. On linux install the
+python-pip package.
+
+Authors
+=======
+
+* Enric Balletbo i Serra <eballetbo@iseebcn.com>
+
