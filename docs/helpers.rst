@@ -22,3 +22,9 @@ MODEM
 .. automodule:: igep_qa.helpers.modem
    :members:
 
+OMAP
+----
+
+.. automodule:: igep_qa.helpers.omap
+   :members:
+
