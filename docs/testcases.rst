@@ -31,3 +31,9 @@ Network
 
 .. automodule:: igep_qa.tests.network
    :members:
+
+WiFi
+----
+
+.. automodule:: igep_qa.tests.wifi
+   :members:
