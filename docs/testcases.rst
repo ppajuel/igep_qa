@@ -20,6 +20,12 @@ Serial
 .. automodule:: igep_qa.tests.serial
    :members:
 
+USB
+---
+
+.. automodule:: igep_qa.tests.usb
+   :members:
+
 Network
 -------
 
