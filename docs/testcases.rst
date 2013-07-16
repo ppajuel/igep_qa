@@ -14,6 +14,12 @@ Audio
 .. automodule:: igep_qa.tests.audio
    :members:
 
+Serial
+------
+
+.. automodule:: igep_qa.tests.serial
+   :members:
+
 Network
 -------
 
