@@ -14,6 +14,12 @@ Audio
 .. automodule:: igep_qa.tests.audio
    :members:
 
+Bluetooth
+---------
+
+.. automodule:: igep_qa.tests.bluetooth
+   :members:
+
 Serial
 ------
 
