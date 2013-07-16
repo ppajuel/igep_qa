@@ -12,5 +12,6 @@ Contents:
    testsuites.rst
    testrunners.rst
    helpers.rst
+   scripts.rst
 
 .. include:: ../README
