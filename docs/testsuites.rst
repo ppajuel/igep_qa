@@ -8,6 +8,12 @@ instructions or goals for each collection of test cases and information on the
 system configuration to be used during testing. A group of test cases may also
 contain prerequisite states or steps, and descriptions of the following tests.
 
+IGEP0020
+--------
+
+.. automodule:: igep_qa.suites.board_igep0020
+   :members:
+
 Example
 -------
 
