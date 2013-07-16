@@ -15,6 +15,7 @@ setup (name='igep_qa',
        author_email='eballetbo@iseebcn.com',
        url='',
        packages = ['igep_qa', 'igep_qa.helpers', 'igep_qa.runners', 'igep_qa.suites', 'igep_qa.tests'],
+       data_files = [('/usr/share/igep_qa/contrib', ['contrib/dtmf.wav'])],
        license='LICENSE',
        classifiers = [
          'Intended Audience :: Developers',

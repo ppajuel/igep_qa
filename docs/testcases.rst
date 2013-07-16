@@ -8,6 +8,12 @@ sufficiently scrutinized to be released. Test cases are often referred to as
 test scripts, particularly when written. Written test cases are usually
 collected into test suites.
 
+Audio
+-----
+
+.. automodule:: igep_qa.tests.audio
+   :members:
+
 Network
 -------
 
