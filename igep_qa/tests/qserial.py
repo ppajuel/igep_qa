@@ -25,6 +25,11 @@ class TestSerial(unittest.TestCase):
     def __del__(self):
         self.port.close()
 
+    def shortDescription(self):
+        doc = self._testMethodDoc
+        doc = doc.replace("Test Serial", "Test Serial (%s)" % self.port.portstr)
+        return doc and doc.split("\n")[0].strip() or None
+
     def test_serial_loopback(self):
         """ Test Serial : Loopback, each sent character should return
 
