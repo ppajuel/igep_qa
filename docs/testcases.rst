@@ -14,6 +14,12 @@ Audio
 .. automodule:: igep_qa.tests.qaudio
    :members:
 
+Battery Backup
+--------------
+
+.. automodule:: igep_qa.tests.qbattery
+   :members:
+
 Bluetooth
 ---------
 
