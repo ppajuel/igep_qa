@@ -51,6 +51,11 @@ class TestNetwork(unittest.TestCase):
     def tearDown(self):
         commands.getstatusoutput("ifconfig %s down" % self.interface)
 
+    def shortDescription(self):
+        doc = self._testMethodDoc
+        doc = doc.replace("Test Network", "Test Network (%s)" % self.interface)
+        return doc and doc.split("\n")[0].strip() or None
+
     def test_ping_host(self):
         """ Test Network : Ping the IP address of a remote host
 
