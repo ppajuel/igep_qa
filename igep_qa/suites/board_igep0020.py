@@ -5,12 +5,12 @@ import unittest
 # Test Runners
 from igep_qa.runners.dbmysql import dbmysqlTestRunner
 # Test Cases
-from igep_qa.tests.audio import TestAudio
-from igep_qa.tests.bluetooth import TestBluetooth
-from igep_qa.tests.network import TestNetwork
-from igep_qa.tests.serial import TestSerial
-from igep_qa.tests.usb import TestUSB
-from igep_qa.tests.wifi import TestWiFi
+from igep_qa.tests.qaudio import TestAudio
+from igep_qa.tests.qbluetooth import TestBluetooth
+from igep_qa.tests.qnetwork import TestNetwork
+from igep_qa.tests.qserial import TestSerial
+from igep_qa.tests.qusb import TestUSB
+from igep_qa.tests.qwifi import TestWiFi
  
 # For every test suite we create an instance of TestSuite and add test case
 # instances. When all tests have been added, the suite can be passed to a test

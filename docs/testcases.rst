@@ -11,35 +11,35 @@ collected into test suites.
 Audio
 -----
 
-.. automodule:: igep_qa.tests.audio
+.. automodule:: igep_qa.tests.qaudio
    :members:
 
 Bluetooth
 ---------
 
-.. automodule:: igep_qa.tests.bluetooth
+.. automodule:: igep_qa.tests.qbluetooth
    :members:
 
 Serial
 ------
 
-.. automodule:: igep_qa.tests.serial
+.. automodule:: igep_qa.tests.qserial
    :members:
 
 USB
 ---
 
-.. automodule:: igep_qa.tests.usb
+.. automodule:: igep_qa.tests.qusb
    :members:
 
 Network
 -------
 
-.. automodule:: igep_qa.tests.network
+.. automodule:: igep_qa.tests.qnetwork
    :members:
 
 WiFi
 ----
 
-.. automodule:: igep_qa.tests.wifi
+.. automodule:: igep_qa.tests.qwifi
    :members:

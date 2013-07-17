@@ -38,7 +38,7 @@ Test Runner that only prints a '.' if the test case has been successed, and an
 """
 
 import unittest
-from igep_qa.tests import network
+from igep_qa.tests import qnetwork
 
 def TestSuiteMyExample():
     """ An example class implementation of a test suite.
@@ -48,7 +48,7 @@ def TestSuiteMyExample():
 
     """
     suite = unittest.TestSuite()
-    suite.addTest(network.TestNetwork("test_ping_host", "127.0.0.1", "127.0.0.1", "eth0"))
+    suite.addTest(qnetwork.TestNetwork("test_ping_host", "127.0.0.1", "127.0.0.1", "eth0"))
     return suite
 
 from igep_qa.runners import lightly
