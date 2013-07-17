@@ -38,6 +38,27 @@ def testsuite_IGEP0020():
         host = 192.168.13.1
         database = dbtest
 
+    Before executing the Test Suite make sure that you have disabled any buddy
+    option and configure UART1 to be used as a serial device.
+
+    .. code:: bash
+
+        # buddy=igepp0022
+        board.ei485=no
+
+    Also, make sure getty is not running in any ttyO2 port, modify /etc/inittab
+    file an comment following line:
+
+    .. code:: ini
+
+        S:2345:respawn:/sbin/getty 115200 ttyO2
+
+    You can run the test at bootup adding:
+
+    .. code:: ini
+
+        autotest=IGEP0020 quiet
+
     What is tested?
         - Test audio : IN/OUT loopback.
         - Test Serial : ttyO2 Each sent character should return.
