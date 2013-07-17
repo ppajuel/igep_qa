@@ -38,7 +38,7 @@ class TestWiFi(unittest.TestCase):
         commands.getstatusoutput("ifconfig wlan0 down")
 
     def test_ping_host(self):
-        """  WiFi : Ping the IP address of a remote host.
+        """  Test WiFi : Ping the IP address of a remote host
 
         Type: Functional
 

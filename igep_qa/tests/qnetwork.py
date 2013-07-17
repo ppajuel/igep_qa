@@ -52,7 +52,7 @@ class TestNetwork(unittest.TestCase):
         commands.getstatusoutput("ifconfig %s down" % self.interface)
 
     def test_ping_host(self):
-        """ Ping the IP address of a remote host.
+        """ Test Network : Ping the IP address of a remote host
 
         Type: Functional
 
@@ -67,7 +67,7 @@ class TestNetwork(unittest.TestCase):
         self.failUnless(retval[0] == 0, "failed: Pinging to %s" % self.serverip)
 
     def test_measure_throughput(self):
-        """ Measure the throughput and the quality of a network link.
+        """ Network : Measure the throughput and the quality of a network link.
 
         Type: Performance
 

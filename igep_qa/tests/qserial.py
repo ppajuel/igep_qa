@@ -26,7 +26,7 @@ class TestSerial(unittest.TestCase):
         self.port.close()
 
     def test_serial_loopback(self):
-        """ Loopback, each sent character should return
+        """ Test Serial : Loopback, each sent character should return
 
         Type: Functional
 

@@ -17,7 +17,7 @@ class TestUSB(unittest.TestCase):
         super(TestUSB, self).__init__(testname)
 
     def test_musb_omap(self):
-        """ USB OTG : Check for this_is_the_musb_omap_port file.
+        """ Test USB OTG : Check for this_is_the_musb_omap_port file
 
         Type: Functional
 
@@ -48,7 +48,7 @@ class TestUSB(unittest.TestCase):
                         "MUSB USB not found")
 
     def test_ehci_omap(self):
-        """ USB HOST : Check for this_is_the_ehci_omap_port file.
+        """ Test USB HOST : Check for this_is_the_ehci_omap_port file
 
         Type: Functional
 

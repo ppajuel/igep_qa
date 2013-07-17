@@ -23,7 +23,7 @@ class TestBluetooth(unittest.TestCase):
         self.port = port
 
     def test_get_chip_revision(self):
-        """ Bluetooth : Get chip revision.
+        """ Test Bluetooth : Get chip revision
 
         Type: Functional
 

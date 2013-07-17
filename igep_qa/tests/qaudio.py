@@ -28,7 +28,7 @@ class TestAudio(unittest.TestCase):
             raise Exception("Can't find %s" % files)
 
     def test_audio_loopback(self):
-        """ Audio IN/OUT loopback
+        """ Test Audio : Loopback, sound sent to audio-out should return in audio-in
 
         Type: Functional
 
