@@ -20,7 +20,7 @@ class TestAudio(unittest.TestCase):
 
         """
         required = ["aplay", "arecord", "multimon"]
-        files = "/opt/igep-qa/contrib/dtmf.wav"
+        files = "/usr/share/igep_qa/contrib/dtmf.wav"
         for req in required:
             if not is_in_path(req):
                 raise Exception("Can't find %s" % req)
