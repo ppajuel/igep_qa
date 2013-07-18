@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 
 import ConfigParser
+import commands
+import sys
 import unittest
 # Test Runners
 from igep_qa.runners.dbmysql import dbmysqlTestRunner
 # Test Cases
 from igep_qa.tests.qaudio import TestAudio
+from igep_qa.tests.qbattery import TestBatteryBackup
 from igep_qa.tests.qbluetooth import TestBluetooth
 from igep_qa.tests.qnetwork import TestNetwork
 from igep_qa.tests.qserial import TestSerial
@@ -94,8 +97,94 @@ def testsuite_IGEP0020():
                            config.get('wireless', 'serverip')))
     return suite
 
+def testsuite_IGEP0020_RC80C01():
+    """ A number of TestCases for the IGEP0020 RC80-C01 board.
+
+    The test Suite requires a configuration file /etc/testsuite.conf that consists of
+    different sections in RFC 822. E.g.
+
+    .. code:: ini
+
+        [default]
+        serverip = 192.168.13.1
+        ipaddr = 192.168.13.11
+
+        [remotex]
+        ipaddr = 192.168.13.5
+
+        [mysqld]
+        user = root
+        host = 192.168.13.1
+        database = dbtest
+
+    Make sure getty is not running in any ttyO2 port, modify /etc/inittab
+    file an comment following line:
+
+    .. code:: ini
+
+        S:2345:respawn:/sbin/getty 115200 ttyO2
+
+    You can run the test at bootup adding:
+
+    .. code:: ini
+
+        autotest=IGEP0020_RC80C01 quiet
+
+    What is tested?
+        - Test Audio : Loopback, sound sent to audio-out should return in audio-in
+        - Test Network (eth0): Ping the IP address of a remote host
+        - Test Serial (/dev/ttyO2): Loopback, each sent character should return
+        - Test USB OTG : Check for this_is_the_musb_omap_port file
+        - Test USB HOST : Check for this_is_the_ehci_omap_port file
+        - Test SD-card : Test is running from SD-card (implicit).
+
+    As this board doesn't have DVI output, the results are sent to the server
+    via ssh.
+
+    """
+    # parse testsuite.conf configuration file
+    config = ConfigParser.ConfigParser()
+    config.read('/etc/testsuite.conf')
+    ipaddr = config.get("default", "ipaddr")
+    serverip = config.get("default", "serverip")
+    xserverip = config.get("remotex", "ipaddr")
+
+    # create test suite
+    suite = unittest.TestSuite()
+    suite.addTest(TestAudio("test_audio_loopback"))
+    suite.addTest(TestBatteryBackup("test_battery_backup"))
+    suite.addTest(TestNetwork("test_ping_host", ipaddr, serverip, "eth0"))
+    suite.addTest(TestSerial("test_serial_loopback", "/dev/ttyO2"))
+    suite.addTest(TestUSB("test_ehci_omap"))
+    suite.addTest(TestUSB("test_musb_omap"))
+
+    # log the Test Suite output
+    log_file = "/tmp/log_test.txt"
+    f = open(log_file, "w")
+    # write the IP address in the head of the log file
+    f.write("%s\n" % ipaddr)
+
+    # run test
+    runner = dbmysqlTestRunner(stream=f, verbosity=2)
+    runner.run(suite)
+    # close the log
+    f.close()
+
+    # send result to the server
+    commands.getstatusoutput("ifconfig eth0 %s" % ipaddr)
+    commands.getstatusoutput("scp %s root@%s:/tmp" % (log_file, xserverip))
+    commands.getstatusoutput("ssh -y root@%s xterm -display :0 "
+                            "-fg white -bg black "
+                            "-e /usr/share/igep_qa/contrib/show-results.sh "
+                            % xserverip)
+
 # The main program just runs the test suite in verbose mode
 if __name__ == '__main__':
-    # By default run using the dbmysql runner.
-    suite = dbmysqlTestRunner(verbosity=2)
-    suite.run(testsuite_IGEP0020())
+    args = sys.argv[1:]
+
+    if args[0] == "RC80C01" :
+        testsuite_IGEP0020_RC80C01()
+    else :
+        # By default run using the dbmysql runner.
+        suite = dbmysqlTestRunner(verbosity=2)
+        suite.run(testsuite_IGEP0020())

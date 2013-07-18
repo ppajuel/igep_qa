@@ -31,13 +31,17 @@ TESTSUITE="/usr/lib/python2.7/site-packages/igep_qa/suites"
 do_start() {
 	echo "Starting ${NAME} ..."
 	read CMDLINE < /proc/cmdline
+	echo "Running ${NAME} ..."
+	# TODO: remove sleep and use more elegant solution
+	sleep 5
 	for x in ${CMDLINE}; do
 		case ${x} in
 			autotest=IGEP0020)
-				echo "Running ${NAME} ..."
-				# TODO: remove sleep and use more elegant solution
-				sleep 5
 				exec ${XTERM} -e ${PYTHONBIN} ${TESTSUITE}/board_igep0020.py >/dev/null 2>&1 || status=$?
+				exit ${status};
+				;;
+			autotest=IGEP0020_RC80C01)
+				${PYTHONBIN} ${TESTSUITE}/board_igep0020.py RC80C01 >/dev/null 2>&1 || status=$?
 				exit ${status};
 				;;
 		esac
