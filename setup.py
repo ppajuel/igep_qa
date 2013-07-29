@@ -16,6 +16,7 @@ setup (name='igep_qa',
        url='',
        packages = ['igep_qa', 'igep_qa.helpers', 'igep_qa.runners', 'igep_qa.suites', 'igep_qa.tests'],
        data_files = [('/usr/share/igep_qa/contrib', ['contrib/dtmf.wav']),
+                     ('/usr/share/igep_qa/contrib', ['contrib/test.wav']),
                      ('/etc/init.d', ['scripts/igep-qa.sh'])],
        license='LICENSE',
        classifiers = [
