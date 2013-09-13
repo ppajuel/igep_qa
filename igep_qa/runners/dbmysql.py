@@ -13,6 +13,9 @@ import unittest
 import mysql.connector
 from mysql.connector import errorcode
 
+from igep_qa.helpers.am33xx import cpu_is_am33xx
+from igep_qa.helpers.am33xx import am335x_get_mac_id0
+from igep_qa.helpers.am33xx import am335x_get_mac_id1
 from igep_qa.helpers.common import get_hwaddr
 from igep_qa.helpers.omap import get_dieid
 from igep_qa.helpers.omap import machine_is_igep0020
@@ -62,6 +65,11 @@ def updatedb(tests):
                 "(datetime, of, dieid, mac) "
                 " VALUES (NOW(), %s, %s, %s)")
             data_testsuite = (num, get_dieid(), get_hwaddr("wlan0"))
+        elif cpu_is_am33xx():
+            add_testsuite = ("INSERT INTO testsuite"
+                "(datetime, of, dieid, mac) "
+                " VALUES (NOW(), %s, %s, %s)")
+            data_testsuite = (num, am335x_get_mac_id0(), am335x_get_mac_id1())
         else:
             add_testsuite = ("INSERT INTO testsuite"
                 "(datetime, of) "
