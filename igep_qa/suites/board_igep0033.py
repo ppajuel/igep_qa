@@ -3,7 +3,7 @@
 import ConfigParser
 import unittest
 # Test Runners
-from igep_qa.runners import simple
+from igep_qa.runners import dbmysql
 # Test Cases
 from igep_qa.tests.qaudio import TestAudio
 from igep_qa.tests.qnetwork import TestNetwork
@@ -26,6 +26,11 @@ def testsuite_IGEP0033():
         [default]
         serverip = 192.168.13.1
         ipaddr = 192.168.13.11
+
+        [mysqld]
+        user = root
+        host = 192.168.13.1
+        database = dbtest
 
     Also, make sure getty is not running in any ttyO0 port, modify /etc/inittab
     file an comment following line:
@@ -68,5 +73,10 @@ def testsuite_IGEP0033():
 
 # The main program just runs the test suite in verbose mode
 if __name__ == '__main__':
-    suite =  simple.SimpleTestRunner()
+    #from igep_qa.runners import simple
+    #suite =  simple.SimpleTestRunner()
+    #suite.run(testsuite_IGEP0033())
+
+    # By default run using the dbmysql runner.
+    suite = dbmysql.dbmysqlTestRunner(verbosity=2)
     suite.run(testsuite_IGEP0033())
