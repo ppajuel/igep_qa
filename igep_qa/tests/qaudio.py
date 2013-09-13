@@ -70,8 +70,7 @@ class TestAudio(unittest.TestCase):
             - test.wav (on contrib/test.wav)
 
         Description:
-            - This test only plays a wav file, a user must confirm that the
-            file is played.
+            - This test only plays a wav file, a user must confirm that the file is played.
 
         """
         # Ensure requirements are installed.
