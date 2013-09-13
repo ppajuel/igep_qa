@@ -45,7 +45,7 @@ do_start() {
 				exit ${status};
 				;;
 			autotest=IGEP0033)
-				${PYTHONBIN} ${TESTSUITE}/board_igep0033.py >/dev/tty0 || status=$?
+				${PYTHONBIN} ${TESTSUITE}/board_igep0033.py >/dev/tty0 2>&1 || status=$?
 				exit ${status};
 				;;
 		esac
