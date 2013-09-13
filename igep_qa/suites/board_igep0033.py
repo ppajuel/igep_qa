@@ -43,7 +43,7 @@ def testsuite_IGEP0033():
     What is tested?
         - Test audio : Play a wav file (user check)
         - Test Serial : ttyO0 Each sent character should return
-        - Test USB HOST: Check for this_is_the_ehci_omap_port file
+        - Test USB HOST: Check for this_is_the_musb_hdrc_port file
         - Test Ethernet : Ping the IP address of a remote host
         - Test SD-card : Test is running from SD-card (implicit)
         - Test HDMI : Test shows the test result (implicit)
