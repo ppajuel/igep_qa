@@ -4,6 +4,12 @@ Helper functions
 .. automodule:: igep_qa.helpers.common
    :members:
 
+AM33XX
+------
+
+.. automodule:: igep_qa.helpers.am33xx
+   :members:
+
 GPIOLIB
 -------
 
