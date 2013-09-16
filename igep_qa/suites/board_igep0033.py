@@ -32,18 +32,38 @@ def testsuite_IGEP0033():
         host = 192.168.13.1
         database = dbtest
 
-    Also, make sure getty is not running in any ttyO0 port, modify /etc/inittab
-    file an comment following line:
+    To run the autotest you should replace u-boot.img with and special
+    version with boot delay set to 0, otherwise the boot process stops
+    when you shortcut TX and RX from serial port. See patch below:
 
-    .. code:: ini
+    .. code:: diff
 
-        S:2345:respawn:/sbin/getty 115200 ttyO0
+        diff --git a/include/configs/igep0033.h b/include/configs/igep0033.h
+        index de60f75..fa231ed 100644
+        --- a/include/configs/igep0033.h
+        +++ b/include/configs/igep0033.h
+        @@ -66,7 +66,7 @@
+        #define CONFIG_UBI_SILENCE_MSG
+        #define CONFIG_UBIFS_SILENCE_MSG
+
+       -#define CONFIG_BOOTDELAY               1       /* negative for no autoboot */
+       +#define CONFIG_BOOTDELAY               0       /* negative for no autoboot */
+
+        #define CONFIG_ENV_VARS_UBOOT_CONFIG
+        #define CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
+        #define CONFIG_EXTRA_ENV_SETTINGS
 
     You can run the test at bootup adding:
 
     .. code:: ini
 
         autotest=IGEP0033 quiet
+
+    As example, for u-boot you can create a uEnv.txt and set mmcargs like this:
+
+    .. code:: ini
+
+        mmcargs=setenv bootargs console=${console} autotest=IGEP0033 quiet root=${mmcroot} rootfstype=${mmcrootfstype}
 
     What is tested?
         - Test audio : Play a wav file (user check)
