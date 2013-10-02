@@ -24,10 +24,10 @@ Just get it:
 
 .. code-block:: none
 
-      pip install simpleai
+      python setup.py install
 
-You will need to have pip installed on your system. On linux install the
-python-pip package.
+You will need to have python-setuptools installed on your system. On linux install the
+python-setuptools package.
 
 Authors
 =======
