@@ -29,6 +29,25 @@ Just get it:
 You will need to have python-setuptools installed on your system. On linux install the
 python-setuptools package.
 
+Documentation
+=============
+
+In order to generate the documentation you will need to have following packages:
+
+* python-sphinx
+* python-pygments
+* mysql-connector-python (>= 1.0.12)
+
+The mysql-connector-python is available at:
+
+* http://dev.mysql.com/downloads/connector/python/
+
+Once thre requirements were installed go to docs directory and run:
+
+.. code-block:: none
+
+      make html
+
 Authors
 =======
 
