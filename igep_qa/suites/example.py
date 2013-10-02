@@ -8,7 +8,7 @@ order in which they were added, aggregating the results.
 
 An example class implementation of a test suite:
 
-.. code:: python
+.. code-block:: python
 
     import unittest
     from tests import network
@@ -24,7 +24,7 @@ popular TextTestRunner from unittest module. The second one, uses a very simple
 Test Runner that only prints a '.' if the test case has been successed, and an
 'F' if the test case has been failed.
 
-.. code:: python
+.. code-block:: python
 
     from runners import lightly
 

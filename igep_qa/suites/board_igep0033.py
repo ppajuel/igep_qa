@@ -21,7 +21,7 @@ def testsuite_IGEP0033():
     The test Suite requires a configuration file /etc/testsuite.conf that consists of
     different sections in RFC 822. E.g.
 
-    .. code:: ini
+    .. code-block:: ini
 
         [default]
         serverip = 192.168.13.1
@@ -36,7 +36,7 @@ def testsuite_IGEP0033():
     version with boot delay set to 0, otherwise the boot process stops
     when you shortcut TX and RX from serial port. See patch below:
 
-    .. code:: diff
+    .. code-block:: diff
 
         diff --git a/include/configs/igep0033.h b/include/configs/igep0033.h
         index de60f75..fa231ed 100644
@@ -55,13 +55,13 @@ def testsuite_IGEP0033():
 
     You can run the test at bootup adding:
 
-    .. code:: ini
+    .. code-block:: ini
 
         autotest=IGEP0033 quiet
 
     As example, for u-boot you can create a uEnv.txt and set mmcargs like this:
 
-    .. code:: ini
+    .. code-block:: ini
 
         mmcargs=setenv bootargs console=${console} autotest=IGEP0033 quiet root=${mmcroot} rootfstype=${mmcrootfstype}
 

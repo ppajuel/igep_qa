@@ -111,7 +111,7 @@ class dbmysqlTestRunner:
     [mysqld] section followed by user, host and database name in the style of
     RFC 822. E.g.
 
-    .. code:: ini
+    .. code-block:: ini
     
         [mysqld]
         user = username

@@ -26,7 +26,7 @@ def testsuite_IGEP0020():
     The test Suite requires a configuration file /etc/testsuite.conf that consists of
     different sections in RFC 822. E.g.
 
-    .. code:: ini
+    .. code-block:: ini
 
         [default]
         serverip = 192.168.13.1
@@ -44,7 +44,7 @@ def testsuite_IGEP0020():
     Before executing the Test Suite make sure that you have disabled any buddy
     option and configure UART1 to be used as a serial device.
 
-    .. code:: bash
+    .. code-block:: bash
 
         # buddy=igepp0022
         board.ei485=no
@@ -52,13 +52,13 @@ def testsuite_IGEP0020():
     Also, make sure getty is not running in any ttyO2 port, modify /etc/inittab
     file an comment following line:
 
-    .. code:: ini
+    .. code-block:: ini
 
         S:2345:respawn:/sbin/getty 115200 ttyO2
 
     You can run the test at bootup adding:
 
-    .. code:: ini
+    .. code-block:: ini
 
         autotest=IGEP0020 quiet
 
@@ -103,7 +103,7 @@ def testsuite_IGEP0020_RC80C01():
     The test Suite requires a configuration file /etc/testsuite.conf that consists of
     different sections in RFC 822. E.g.
 
-    .. code:: ini
+    .. code-block:: ini
 
         [default]
         serverip = 192.168.13.1
@@ -120,13 +120,13 @@ def testsuite_IGEP0020_RC80C01():
     Make sure getty is not running in any ttyO2 port, modify /etc/inittab
     file an comment following line:
 
-    .. code:: ini
+    .. code-block:: ini
 
         S:2345:respawn:/sbin/getty 115200 ttyO2
 
     You can run the test at bootup adding:
 
-    .. code:: ini
+    .. code-block:: ini
 
         autotest=IGEP0020_RC80C01 quiet
 
