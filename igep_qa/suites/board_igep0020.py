@@ -2,6 +2,7 @@
 
 import ConfigParser
 import commands
+import errno
 import sys
 import unittest
 # Test Runners
@@ -166,7 +167,7 @@ def testsuite_IGEP0020_RC80C01():
 
     # run test
     runner = dbmysqlTestRunner(stream=f, verbosity=2)
-    runner.run(suite)
+    retval = runner.run(suite)
     # close the log
     f.close()
 
@@ -177,14 +178,19 @@ def testsuite_IGEP0020_RC80C01():
                             "-fg white -bg black "
                             "-e /usr/share/igep_qa/contrib/show-results.sh "
                             % xserverip)
+    return retval
 
 # The main program just runs the test suite in verbose mode
 if __name__ == '__main__':
     args = sys.argv[1:]
+    testresult = TestResult()
 
     if args[0] == "RC80C01" :
-        testsuite_IGEP0020_RC80C01()
+        retval = testsuite_IGEP0020_RC80C01()
     else :
         # By default run using the dbmysql runner.
         suite = dbmysqlTestRunner(verbosity=2)
-        suite.run(testsuite_IGEP0020())
+        retval = suite.run(testsuite_IGEP0020())
+    # return 0 if all is ok, otherwise return the number of failures + errors
+    sys.exit(len(testresult.failures) + len(testresult.errors))
+

@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import ConfigParser
+import errno
+import sys
 import unittest
 # Test Runners
 from igep_qa.runners import dbmysql
@@ -101,4 +103,7 @@ if __name__ == '__main__':
 
     # By default run using the dbmysql runner.
     suite = dbmysql.dbmysqlTestRunner(verbosity=2)
-    suite.run(testsuite_IGEP0033())
+    testresult = suite.run(testsuite_IGEP0033())
+    # return 0 if all is ok, otherwise return the number of failures + errors
+    sys.exit(len(testresult.failures) + len(testresult.errors))
+
