@@ -36,9 +36,9 @@ class SimpleTestRunner:
 
 class TextTestResult(unittest.TestResult):
     # Print in terminal with colors
-    PASS = '\033[92mPASS\033[0m\n'
-    FAIL = '\033[91mFAIL\033[0m\n'
-    ERROR = '\033[91mERROR\033[0m\n'
+    PASS = '\033[32mPASS\033[0m\n'
+    FAIL = '\033[31mFAIL\033[0m\n'
+    ERROR = '\033[31mERROR\033[0m\n'
 
     def __init__(self, runner):
         unittest.TestResult.__init__(self)
