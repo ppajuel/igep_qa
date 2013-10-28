@@ -26,6 +26,12 @@ Bluetooth
 .. automodule:: igep_qa.tests.qbluetooth
    :members:
 
+Flash
+-----
+
+.. automodule:: igep_qa.tests.qflash
+   :members:
+
 Serial
 ------
 
