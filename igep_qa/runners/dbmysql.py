@@ -24,6 +24,34 @@ PASS = '\033[32mPASS\033[0m\n'
 FAIL = '\033[31mFAIL\033[0m\n'
 ERROR = '\033[31mERROR\033[0m\n'
 
+FANCYFAIL = """--------------------------------
+\033[31m################################\033[0m
+
+\033[31m########    ###    #### ##      \033[0m
+\033[31m##         ## ##    ##  ##      \033[0m
+\033[31m##        ##   ##   ##  ##      \033[0m
+\033[31m######   ##     ##  ##  ##      \033[0m
+\033[31m##       #########  ##  ##      \033[0m
+\033[31m##       ##     ##  ##  ##      \033[0m
+\033[31m##       ##     ## #### ########\033[0m
+
+\033[31m################################\033[0m
+"""
+
+FANCYPASS = """-------------------------------------
+\033[32m#####################################\033[0m
+
+\033[32m########     ###     ######   ###### \033[0m
+\033[32m##     ##   ## ##   ##    ## ##    ##\033[0m
+\033[32m##     ##  ##   ##  ##       ##      \033[0m
+\033[32m########  ##     ##  ######   ###### \033[0m
+\033[32m##        #########       ##       ##\033[0m
+\033[32m##        ##     ## ##    ## ##    ##\033[0m
+\033[32m##        ##     ##  ######   ###### \033[0m
+
+\033[32m#####################################\033[0m
+"""
+
 def updatedb(tests):
     # parse testsuite.conf configuration file
     config = ConfigParser.ConfigParser()
@@ -147,9 +175,11 @@ class dbmysqlTestRunner:
             self.writeUpdate(PASS)
         else:
             self.writeUpdate(FAIL)
-        self.writeUpdate("---------------------------------------------\n")
-        self.writeUpdate("TEST FINISHED\n")
-        self.writeUpdate("---------------------------------------------\n")
+        if (len(result.failures) + len(result.errors)):
+	    self.writeUpdate(FANCYFAIL)
+        else:
+	    self.writeUpdate(FANCYPASS)
+
         return result
 
 class TextTestResult(unittest.TestResult):
