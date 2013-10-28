@@ -9,6 +9,7 @@ from igep_qa.tests.qaudio import TestAudio
 from igep_qa.tests.qnetwork import TestNetwork
 from igep_qa.tests.qserial import TestSerial
 from igep_qa.tests.qusb import TestUSB
+from igep_qa.tests.qflash import TestFlash
 
 # For every test suite we create an instance of TestSuite and add test case
 # instances. When all tests have been added, the suite can be passed to a test
@@ -89,6 +90,7 @@ def testsuite_IGEP0033():
                                 config.get('default', 'ipaddr'),
                                 config.get('default', 'serverip'),
                                 'eth0'))
+    suite.addTest(TestFlash('test_nandtest', '/dev/mtd3'))
     return suite
 
 # The main program just runs the test suite in verbose mode
