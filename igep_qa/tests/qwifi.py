@@ -60,5 +60,23 @@ class TestWiFi(unittest.TestCase):
         retval = commands.getstatusoutput("ifconfig wlan0 down")
         self.failUnless(retval[0] == 0, "failed: Can't down interface wlan0")
 
+    def test_scan_for_essid(self):
+        """ Test WiFi : Scan for ESSID network
+
+        Type: Functional
+
+        Description:
+            The test sets up the 'interface' and then scans for the presence of
+            a WiFi ESSID, after that set down the 'interface'.
+
+        """
+        retval = commands.getstatusoutput("ip link set wlan0 up")
+        self.failUnless(retval[0] == 0, "failed: No wlan0 interface found.")
+        retval = commands.getstatusoutput("iw dev wlan0 scan")
+        self.failUnless(retval[0] == 0, "failed: Is not possible to scan.")
+        self.failUnless(self.essid in retval[1], "failed: ESSID %s not found." % self.essid)
+        retval = commands.getstatusoutput("ip link set wlan0 down")
+        self.failUnless(retval[0] == 0, "failed: Can't down the interface.")
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)
