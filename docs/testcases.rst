@@ -20,6 +20,12 @@ Battery Backup
 .. automodule:: igep_qa.tests.qbattery
    :members:
 
+Block Storage
+-------------
+
+.. automodule:: igep_qa.tests.qstorage
+   :members:
+
 Bluetooth
 ---------
 
