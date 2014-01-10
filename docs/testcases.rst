@@ -44,6 +44,12 @@ Serial
 .. automodule:: igep_qa.tests.qserial
    :members:
 
+SYSFS
+------
+
+.. automodule:: igep_qa.tests.qsysfs
+   :members:
+
 USB
 ---
 
