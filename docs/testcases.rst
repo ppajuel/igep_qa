@@ -32,6 +32,12 @@ Flash
 .. automodule:: igep_qa.tests.qflash
    :members:
 
+HWMON
+-----
+
+.. automodule:: igep_qa.tests.qhwmon
+   :members:
+
 Serial
 ------
 
