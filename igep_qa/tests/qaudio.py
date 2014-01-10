@@ -15,6 +15,11 @@ class TestAudio(unittest.TestCase):
     """ Generic tests for audio interfaces.
 
     """
+    def __init__(self, testname, testdescription = ''):
+        super(TestAudio, self).__init__(testname)
+        # Overwrite test short description
+        if testdescription:
+            self._testMethodDoc = testdescription
 
     def test_audio_loopback(self):
         """ Test Audio : Loopback, sound sent to audio-out should return in audio-in
