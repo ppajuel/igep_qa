@@ -11,7 +11,7 @@ def cpu_is_omap5():
     """
     return QDeviceTree().compatible("ti,omap5")
 
-def get_dieid():
+def omap3_get_dieid():
     """ Single die identifier for OMAP processors
 
     Returns the die number in hexadecimal format
