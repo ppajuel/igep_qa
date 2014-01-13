@@ -176,9 +176,9 @@ class dbmysqlTestRunner:
         else:
             self.writeUpdate(FAIL)
         if (len(result.failures) + len(result.errors)):
-	    self.writeUpdate(FANCYFAIL)
+            self.writeUpdate(FANCYFAIL)
         else:
-	    self.writeUpdate(FANCYPASS)
+            self.writeUpdate(FANCYPASS)
 
         return result
 
