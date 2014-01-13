@@ -157,4 +157,4 @@ class QMmap:
         retval = struct.unpack('I', mm.read(self.WORD))
         mm.close()
         os.close(fd)
-        return "%X" % retval[0]
+        return "%08X" % retval[0]
