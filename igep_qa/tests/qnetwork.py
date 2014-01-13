@@ -6,6 +6,7 @@ Network Test Cases modules for unittest
 """
 
 import commands
+import time
 import unittest
 
 from igep_qa.helpers import common
@@ -47,6 +48,8 @@ class TestNetwork(unittest.TestCase):
         commands.getstatusoutput("ifconfig %s down" % self.interface)
         commands.getstatusoutput("ifconfig %s %s"
                                 "" % (self.interface, self.ipaddr))
+        # Use a small delay to be sure the interface is up
+        time.sleep(1)
 
     def tearDown(self):
         commands.getstatusoutput("ifconfig %s down" % self.interface)
