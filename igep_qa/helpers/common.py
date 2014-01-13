@@ -112,6 +112,25 @@ class QCmdline:
             return False
         return True
 
+class QDeviceTree:
+    """ Helper class to parse the /proc/device-tree
+
+    On Linux systems information about device-tree in the
+    computer can be gleaned from /proc/device-tree directory.
+
+    """
+    def compatible(self, name):
+        """ Check for the existence of a kernel parameter
+
+        Return True if name is in compatible, otherwise returns False
+
+        Keyword arguments:
+            - name: The compatible string to be found.
+
+        """
+        fd = open("/proc/device-tree/compatible", "r")
+        return (name in fd.read())
+
 class QMmap:
     """ Simple helper class to read/write from/to any location in memory
 
