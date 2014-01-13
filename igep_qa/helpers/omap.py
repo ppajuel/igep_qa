@@ -3,7 +3,13 @@ This provides various OMAP/IGEP related helper functions.
 
 """
 
-from igep_qa.helpers.common import QMmap, QCpuinfo
+from igep_qa.helpers.common import QMmap, QCpuinfo, QDeviceTree
+
+def cpu_is_omap5():
+    """ Returns True if machine is OMAP5, otherwise returns False
+
+    """
+    return QDeviceTree().compatible("ti,omap5")
 
 def get_dieid():
     """ Single die identifier for OMAP processors
@@ -14,6 +20,18 @@ def get_dieid():
 
     """
     registers = [0x4830A224, 0x4830A220, 0x4830A21C, 0x4830A218]
+    mm = QMmap()
+    return "".join(mm.read(addr) for addr in registers)
+
+def omap5_get_dieid():
+    """ Single die identifier for OMAP5 processors
+
+    Returns the die number in hexadecimal format
+
+    See OMAP543x Multimedia Device TRM Revision X
+
+    """
+    registers = [0x4A002210, 0x4A00220C, 0x4A002208, 0x4A002200]
     mm = QMmap()
     return "".join(mm.read(addr) for addr in registers)
 
