@@ -48,6 +48,14 @@ do_start() {
 				${PYTHONBIN} ${TESTSUITE}/board_igep0033.py >/dev/tty0 2>&1 || status=$?
 				exit ${status};
 				;;
+			autotest=IGEP0050)
+				${PYTHONBIN} ${TESTSUITE}/board_igep0050.py >/dev/tty0 2>&1 || status=$?
+				exit ${status};
+				;;
+			autotest=IGEP0050_RB20)
+				${PYTHONBIN} ${TESTSUITE}/board_igep0050.py RB20 >/dev/tty0 2>&1 || status=$?
+				exit ${status};
+				;;
 		esac
 	done
 }

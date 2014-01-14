@@ -20,6 +20,12 @@ IGEP0033
 .. automodule:: igep_qa.suites.board_igep0033
    :members:
 
+IGEP0050
+--------
+
+.. automodule:: igep_qa.suites.board_igep0050
+   :members:
+
 Example
 -------
 
