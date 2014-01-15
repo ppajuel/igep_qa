@@ -3,6 +3,8 @@
 import ConfigParser
 import sys
 import unittest
+# Test Helpers
+from igep_qa.helpers import omap
 # Test Runners
 from igep_qa.runners import dbmysql
 # Test Cases
@@ -68,7 +70,8 @@ def testsuite_IGEP0050():
         - Test USB HOST 1-2.2: Check for this_is_an_storage_device file
         - Test USB HOST 1-3.1: Check for this_is_an_storage_device file
         - Test USB HOST 1-3.2: Check for this_is_an_storage_device file
-        - Test HDMI Audio: Play a wav file
+        - Test Audio HDMI: Play a wav file
+        - Test Audio JACK: Loopback, sound sent to audio-out should return in audio-in
         - Test CPU TEMP: Check temperature is in range 40-70 degree
         - Test PALMAS: Check for PMIC in bus 0 at address 0x48
         - Test TWL6040: Check for audio codec in bus 0 at address 0x4b
@@ -81,7 +84,6 @@ def testsuite_IGEP0050():
         - Test Network : Ping the IP address of a remote host
 
     What is NOT tested?
-        - AUDIO IN/OUT JACK
         - BLUETOOTH
         - USER BUTTON
         - USER LEDS
@@ -105,7 +107,9 @@ def testsuite_IGEP0050():
     suite.addTest(TestBlockStorage('test_storage_device', 'usb1/1-3/1-3.2',
         'Test USB HOST 1-3.2: Check for this_is_an_storage_device file'))
     suite.addTest(TestAudio('test_audio_playwav',
-        'Test HDMI Audio: Play a wav file'))
+        testdescription='Test Audio HDMI: Play a wav file'))
+    suite.addTest(TestAudio('test_audio_loopback', 'plughw:1,0',
+        'Test Audio JACK: Loopback, sound sent to audio-out should return in audio-in'))
     suite.addTest(TestHwmon('test_temperature_range', 
         '/sys/class/hwmon/hwmon0/temp1_input', 25000, 70000,
         'Test CPU TEMP: Check temperature is in range 40-70 degree'))
@@ -180,7 +184,8 @@ def testsuite_IGEP0050_RB20():
         - Test USB HOST 1-2.2: Check for this_is_an_storage_device file
         - Test USB HOST 1-3.1: Check for this_is_an_storage_device file
         - Test USB HOST 1-3.2: Check for this_is_an_storage_device file
-        - Test HDMI Audio: Play a wav file
+        - Test Audio HDMI: Play a wav file
+        - Test Audio JACK: Loopback, sound sent to audio-out should return in audio-in
         - Test CPU TEMP: Check temperature is in range 40-70 degree
         - Test PALMAS: Check for PMIC in bus 0 at address 0x48
         - Test TWL6040: Check for audio codec in bus 0 at address 0x4b
@@ -191,7 +196,6 @@ def testsuite_IGEP0050_RB20():
         - Test Network : Ping the IP address of a remote host
 
     What is NOT tested?
-        - AUDIO IN/OUT JACK
         - USER BUTTON
         - USER LEDS
         - USB 3.0 CONNECTOR
@@ -214,7 +218,9 @@ def testsuite_IGEP0050_RB20():
     suite.addTest(TestBlockStorage('test_storage_device', 'usb1/1-3/1-3.2',
         'Test USB HOST 1-3.2: Check for this_is_an_storage_device file'))
     suite.addTest(TestAudio('test_audio_playwav',
-        'Test HDMI Audio: Play a wav file'))
+        testdescription='Test Audio HDMI: Play a wav file'))
+    suite.addTest(TestAudio('test_audio_loopback', 'plughw:1,0',
+        'Test Audio JACK: Loopback, sound sent to audio-out should return in audio-in'))
     suite.addTest(TestHwmon('test_temperature_range', 
         '/sys/class/hwmon/hwmon0/temp1_input', 25000, 50000,
         'Test CPU TEMP: Check temperature is in range 30-60 degree'))
@@ -241,6 +247,9 @@ if __name__ == '__main__':
     # By default run using the dbmysql runner.
     suite = dbmysql.dbmysqlTestRunner(verbosity=2)
     retval = unittest.TestResult()
+
+    # Do some things to prepare the test environment.
+    omap.igep0050_set_headset_amixer_settings(1)
 
     if len(args) == 0:
         # IGEP0050-RB10
