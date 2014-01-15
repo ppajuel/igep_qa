@@ -4,6 +4,7 @@ This provides various OMAP/IGEP related helper functions.
 """
 
 from igep_qa.helpers.common import QMmap, QCpuinfo, QDeviceTree
+import commands
 
 def cpu_is_omap5():
     """ Returns True if machine is OMAP5, otherwise returns False
@@ -103,3 +104,27 @@ def buddy_is_ilms0015():
     # otherwise
     fd.close()
     return False
+
+def igep0050_set_headset_amixer_settings(headset):
+    """ Set amixer settings to playback/capture via headset,
+
+    Make sure that the following amixer settings are done for the corresponding
+    card (check the card no. by running the command cat /proc/asound/cards).
+
+    """
+    commands.getoutput("amixer cset -c %s name='Headset Left Playback' 1" % headset)
+    commands.getoutput("amixer cset -c %s name='Headset Right Playback' 1" % headset)
+    commands.getoutput("amixer cset -c %s name='Headset Playback Volume' 12" % headset)
+    commands.getoutput("amixer cset -c %s name='DL1 PDM Switch' 1" % headset)
+    commands.getoutput("amixer cset -c %s name='Sidetone Mixer Playback' 1" % headset)
+    commands.getoutput("amixer cset -c %s name='SDT DL Volume' 120" % headset)
+    commands.getoutput("amixer cset -c %s name='DL1 Mixer Multimedia' 1" % headset)
+    commands.getoutput("amixer cset -c %s name='DL1 Media Playback Volume' 110" % headset)
+    commands.getoutput("amixer cset -c %s name='Sidetone Mixer Capture' 1" % headset)
+    commands.getoutput("amixer sset -c %s 'Analog Left',0 'Headset Mic'" % headset)
+    commands.getoutput("amixer sset -c %s 'Analog Right',0 'Headset Mic'" % headset)
+    commands.getoutput("amixer sset -c %s 'AUDUL Media',0 149" % headset)
+    commands.getoutput("amixer sset -c %s 'Capture',0 4" % headset)
+    commands.getoutput("amixer sset -c %s MUX_UL00,0 AMic0" % headset)
+    commands.getoutput("amixer sset -c %s MUX_UL01,0 AMic1" % headset)
+    commands.getoutput("amixer sset -c %s 'AMIC UL',0 120" % headset)
