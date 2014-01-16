@@ -9,6 +9,7 @@ from igep_qa.helpers import omap
 from igep_qa.runners import dbmysql
 # Test Cases
 from igep_qa.tests.qaudio import TestAudio
+from igep_qa.tests.qbluetooth import TestBluetooth
 from igep_qa.tests.qhwmon import TestHwmon
 from igep_qa.tests.qi2c import TestI2C
 from igep_qa.tests.qnetwork import TestNetwork
@@ -81,10 +82,10 @@ def testsuite_IGEP0050():
         - Test SEM08G: Check for eMMC (8G) block device
         - Test Serial : Loopback, each sent character should return
         - Test WiFi : Scan for ESSID network
+        - Test Bluetooth : Attach serial devices via UART HCI to BlueZ stack
         - Test Network : Ping the IP address of a remote host
 
     What is NOT tested?
-        - BLUETOOTH
         - USER BUTTON
         - USER LEDS
         - USB 3.0 CONNECTOR
@@ -94,6 +95,8 @@ def testsuite_IGEP0050():
     # parse testsuite.conf configuration file
     config = ConfigParser.ConfigParser()
     config.read('/etc/testsuite.conf')
+    # Do some things to prepare the test environment.
+    omap.igep0050_power_up_bluetooth()
     # create test suite
     suite = unittest.TestSuite()
     suite.addTest(TestBlockStorage('test_storage_device', 'ata1/host0',
@@ -129,6 +132,8 @@ def testsuite_IGEP0050():
     suite.addTest(TestWiFi("test_scan_for_essid",
                            config.get('wireless', 'essid'),
                            config.get('wireless', 'serverip')))
+    suite.addTest(TestBluetooth("test_attach_uart_hci", "/dev/ttyO4",
+                           "-s 115200 texas 3000000"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttyO2"))
     suite.addTest(TestNetwork("test_ping_host",
                             config.get('default', 'ipaddr'),
