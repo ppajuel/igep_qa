@@ -5,6 +5,7 @@ This provides various OMAP/IGEP related helper functions.
 
 from igep_qa.helpers.common import QMmap, QCpuinfo, QDeviceTree
 import commands
+import time
 
 def cpu_is_omap5():
     """ Returns True if machine is OMAP5, otherwise returns False
@@ -128,3 +129,15 @@ def igep0050_set_headset_amixer_settings(headset):
     commands.getoutput("amixer sset -c %s MUX_UL00,0 AMic0" % headset)
     commands.getoutput("amixer sset -c %s MUX_UL01,0 AMic1" % headset)
     commands.getoutput("amixer sset -c %s 'AMIC UL',0 120" % headset)
+
+def igep0050_power_up_bluetooth():
+    """ Power Up bluetooth device.
+
+    Send a pulse to the BT_EN pin.
+
+    """
+    commands.getoutput("echo 142 > /sys/class/gpio/export")
+    commands.getoutput("echo out > /sys/class/gpio/gpio142/direction")
+    commands.getoutput("echo 0 > /sys/class/gpio/gpio142/value")
+    time.sleep(1)
+    commands.getoutput("echo 1 > /sys/class/gpio/gpio142/value")
