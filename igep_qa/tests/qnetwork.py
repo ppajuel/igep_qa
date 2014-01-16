@@ -45,7 +45,15 @@ class TestNetwork(unittest.TestCase):
         # Instead of, use an ethernet alias.
         if common.is_nfsroot() or self.serverip == "127.0.0.1" :
             self.interface = "%s:0" % self.interface
+        # Force to down the interface
         commands.getstatusoutput("ifconfig %s down" % self.interface)
+        # Use a small delay to be sure the interface is down
+        time.sleep(1)
+        # Verify that we're not able to ping the server when interface is down,
+        # this check is useful to avoid false positives.
+        retval = commands.getstatusoutput("ping -c 1 %s" % self.serverip)
+        self.failIf(retval[0] == 0, "failed: Pinging to %s %s" % (self.serverip, retval[1]))
+        # Set up the interface
         commands.getstatusoutput("ifconfig %s %s"
                                 "" % (self.interface, self.ipaddr))
         # Use a small delay to be sure the interface is up
