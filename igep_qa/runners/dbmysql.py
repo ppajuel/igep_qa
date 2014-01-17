@@ -20,6 +20,7 @@ from igep_qa.helpers.common import get_hwaddr
 from igep_qa.helpers.omap import cpu_is_omap5
 from igep_qa.helpers.omap import omap3_get_dieid, omap5_get_dieid
 from igep_qa.helpers.omap import machine_is_igep0020
+from igep_qa.helpers.omap import machine_is_igep0032
 
 PASS = '\033[32mPASS\033[0m\n'
 FAIL = '\033[31mFAIL\033[0m\n'
@@ -94,6 +95,11 @@ def updatedb(tests):
                 "(datetime, of, dieid, mac) "
                 " VALUES (NOW(), %s, %s, %s)")
             data_testsuite = (num, omap3_get_dieid(), get_hwaddr("wlan0"))
+        elif machine_is_igep0032():
+            add_testsuite = ("INSERT INTO testsuite"
+                "(datetime, of, dieid, mac) "
+                " VALUES (NOW(), %s, %s, %s)")
+            data_testsuite = (num, omap3_get_dieid(), '')
         elif cpu_is_am33xx():
             add_testsuite = ("INSERT INTO testsuite"
                 "(datetime, of, dieid, mac) "
@@ -146,7 +152,7 @@ class dbmysqlTestRunner:
     RFC 822. E.g.
 
     .. code-block:: ini
-    
+
         [mysqld]
         user = username
         host = 127.0.0.1

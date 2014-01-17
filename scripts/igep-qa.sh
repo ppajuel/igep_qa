@@ -56,6 +56,15 @@ do_start() {
 				${PYTHONBIN} ${TESTSUITE}/board_igep0050.py RB20 >/dev/tty0 2>&1 || status=$?
 				exit ${status};
 				;;
+			autotest=BASE0010)
+				# Set display depth to 16 bits per pixel, otherwise letters in red color
+				# are not printed
+				fbset -depth 16
+				# Clear the tty0 terminal
+				clear > /dev/tty0
+				${PYTHONBIN} ${TESTSUITE}/board_base0010.py >/dev/tty0 2>&1 || status=$?
+				exit ${status};
+				;;
 		esac
 	done
 }
