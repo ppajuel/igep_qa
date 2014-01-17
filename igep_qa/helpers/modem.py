@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """
 This provides helper functions for Modem chips.
 
@@ -187,7 +189,7 @@ class TestClassQModemTelit(unittest.TestCase):
 
     def test_command_at_cpin(self):
         self.modem.turn_on()
-        # AT command: Enter pin 
+        # AT command: Enter pin
         retval = self.modem.at_cpin(5555)
         self.failUnless(retval == 0, "Error: Expected 'at+cpin=5555\r\r\nOK"
                         "\r\n' and received '%s' " % retval)

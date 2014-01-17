@@ -35,7 +35,7 @@ class TestFlash(unittest.TestCase):
 
         """
         retval = commands.getstatusoutput("nandtest " + self.mtd_partition + " -k -l 0xE0000")
-        self.failUnless(retval[0]==0, "error: Failed writting nand")
+        self.failUnless(retval[0] == 0, "error: Failed writting nand")
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

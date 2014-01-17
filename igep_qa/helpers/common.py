@@ -41,10 +41,10 @@ def get_hwaddr(ifname):
     Keyword arguments:
          - ifname: The interface name, e.g. eth0, wlan0.
 
-    """ 
+    """
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        info = fcntl.ioctl(s.fileno(), 0x8927,  struct.pack('256s', ifname[:15]))
+        info = fcntl.ioctl(s.fileno(), 0x8927, struct.pack('256s', ifname[:15]))
         return ''.join(['%02x:' % ord(char) for char in info[18:24]])[:-1]
     # exception
     except:

@@ -65,7 +65,7 @@ class QGpio:
             - direction: "in" for input and "out" for output.
 
         """
-        if not os.path.exists("%s/direction" % self.sysfs ):
+        if not os.path.exists("%s/direction" % self.sysfs):
             if self.debug == True:
                 print "direction for GPIO %s not found, skipping" % self.gpio
             pass

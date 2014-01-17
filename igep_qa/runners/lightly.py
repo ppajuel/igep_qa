@@ -27,7 +27,7 @@ class LightlyTestRunner:
     def writeUpdate(self, message):
         self.stream.write(message)
 
-    def run(self, test, success = '.', failure = 'F', error = 'E'):
+    def run(self, test, success='.', failure='F', error='E'):
         """ Run the given test case or Test Suite.
 
         Keyword arguments:

@@ -97,9 +97,9 @@ def testsuite_IGEP0033():
 
 # The main program just runs the test suite in verbose mode
 if __name__ == '__main__':
-    #from igep_qa.runners import simple
-    #suite =  simple.SimpleTestRunner()
-    #suite.run(testsuite_IGEP0033())
+    # from igep_qa.runners import simple
+    # suite =  simple.SimpleTestRunner()
+    # suite.run(testsuite_IGEP0033())
 
     # By default run using the dbmysql runner.
     suite = dbmysql.dbmysqlTestRunner(verbosity=2)

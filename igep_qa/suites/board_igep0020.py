@@ -15,7 +15,7 @@ from igep_qa.tests.qnetwork import TestNetwork
 from igep_qa.tests.qserial import TestSerial
 from igep_qa.tests.qusb import TestUSB
 from igep_qa.tests.qwifi import TestWiFi
- 
+
 # For every test suite we create an instance of TestSuite and add test case
 # instances. When all tests have been added, the suite can be passed to a test
 # runner, such as TextTestRunner. It will run the individual test cases in the
@@ -81,7 +81,7 @@ def testsuite_IGEP0020():
     # parse testsuite.conf configuration file
     config = ConfigParser.ConfigParser()
     config.read('/etc/testsuite.conf')
-    # create test suite 
+    # create test suite
     suite = unittest.TestSuite()
     suite.addTest(TestAudio('test_audio_loopback'))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttyO2"))

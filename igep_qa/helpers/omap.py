@@ -1,4 +1,6 @@
-""" 
+#!/usr/bin/env python
+
+"""
 This provides various OMAP/IGEP related helper functions. 
 
 """

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-""" 
+"""
 This provides helper functions for MADC module.
 
 See: The TPS65950 Technical Reference Manual (TPS65950 ES 1.2 TRM vG )
@@ -93,7 +93,7 @@ class QMadc:
         if (self.channel == 0 | self.channel == 1):
             retval = conv_result * step_size
         elif (self.channel > 1 | self.channel < 8):
-            # channel 2 to 7 
+            # channel 2 to 7
             retval = conv_result * step_size / 0.6
         elif (self.channel == 8):
             retval = conv_result * step_size / 0.21

@@ -19,7 +19,7 @@ class TestHwmon(unittest.TestCase):
 
     """
 
-    def __init__(self, testname, sysfspath, tmin, tmax, testdescription = ''):
+    def __init__(self, testname, sysfspath, tmin, tmax, testdescription=''):
         super(TestHwmon, self).__init__(testname)
         self.sysfspath = sysfspath
         self.tmin = tmin

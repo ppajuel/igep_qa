@@ -46,7 +46,7 @@ class TestSerial(unittest.TestCase):
         """
         for c in map(chr, range(32)):
             self.port.write(c)
-            time.sleep(0.05)    # there might be a small delay
+            time.sleep(0.05)  # there might be a small delay
             self.failUnless(self.port.inWaiting() == 1, "failed: Expected one "
                             "character for inWainting()")
             self.failUnless(self.port.read(1) == c, "failed: Expected a '%s' "

@@ -22,7 +22,7 @@ class TestI2C(unittest.TestCase):
 
     """
 
-    def __init__(self, testname, i2cbus, address, testdescription = ''):
+    def __init__(self, testname, i2cbus, address, testdescription=''):
         super(TestI2C, self).__init__(testname)
         self.i2cbus = i2cbus
         self.address = address

@@ -24,7 +24,7 @@ class TestBlockStorage(unittest.TestCase):
         - testdescription: Optional test description to overwrite the default.
 
     """
-    def __init__(self, testname, sysfsname, testdescription = ''):
+    def __init__(self, testname, sysfsname, testdescription=''):
         super(TestBlockStorage, self).__init__(testname)
         self.sysfsname = sysfsname
         self.file = 'this_is_an_storage_device'

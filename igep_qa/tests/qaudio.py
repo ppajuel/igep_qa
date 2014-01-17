@@ -21,7 +21,7 @@ class TestAudio(unittest.TestCase):
         - testdescription: Optional test description to overwrite the default.
 
     """
-    def __init__(self, testname, device = '', testdescription = ''):
+    def __init__(self, testname, device='', testdescription=''):
         super(TestAudio, self).__init__(testname)
         self.device = device
         # if not empty, add the -D option
@@ -71,7 +71,7 @@ class TestAudio(unittest.TestCase):
         commands.getoutput("multimon -t wav -a DTMF recorded.wav | grep 'DTMF: 5'")
         retval = commands.getstatusoutput("multimon -t wav -a DTMF "
                                           "/tmp/recorded.wav | grep 'DTMF: 5'")
-        
+
         self.failUnless(retval[0] == 0, "failed: No DTMF found in recorded "
                         "file")
 

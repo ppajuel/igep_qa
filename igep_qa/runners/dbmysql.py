@@ -61,12 +61,12 @@ def updatedb(tests):
     cfg = { }
     cfg['user'] = config.get('mysqld', 'user')
     # TODO : disabled password because don't work on DUT
-    #cfg['password'] = config.get('mysqld', 'password') don't work for now on DUT!
+    # cfg['password'] = config.get('mysqld', 'password') don't work for now on DUT!
     cfg['password'] = ''
     cfg['host'] = config.get('mysqld', 'host')
     cfg['database'] = config.get('mysqld', 'database')
     # TODO : disabled raise_on_warning because don't work on DUT
-    #cfg['raise_on_warnings'] = config.get('mysqld', 'raise_on_warnings')
+    # cfg['raise_on_warnings'] = config.get('mysqld', 'raise_on_warnings')
     interface = 'eth0'
     ipaddr = config.get('default', 'ipaddr')
 
@@ -88,7 +88,7 @@ def updatedb(tests):
             return -1
         num = row[0]
 
-        # insert 
+        # insert
         if machine_is_igep0020():
             add_testsuite = ("INSERT INTO testsuite"
                 "(datetime, of, dieid, mac) "
@@ -114,7 +114,7 @@ def updatedb(tests):
         # insert test cases
         testsuite_id = cursor.lastrowid
         for t in tests:
-            add_testcase =  ("INSERT INTO testcase "
+            add_testcase = ("INSERT INTO testcase "
                    "(name, result, testsuite_id) "
                    "VALUES (%s, %s, %s)")
             data_testcase = (t['name'], t['result'], testsuite_id)

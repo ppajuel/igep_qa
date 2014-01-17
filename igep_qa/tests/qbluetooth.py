@@ -21,7 +21,7 @@ class TestBluetooth(unittest.TestCase):
         - bccmd
 
     """
-    def __init__(self, testname, port, options = ''):
+    def __init__(self, testname, port, options=''):
         super(TestBluetooth, self).__init__(testname)
         self.port = port
         self.options = options
@@ -37,7 +37,7 @@ class TestBluetooth(unittest.TestCase):
         """
         retval = commands.getstatusoutput("bccmd -t bcsp -d %s chiprev"
                                           "" % self.port)
-        self.failUnless(retval[0]==0, "error: Failed to get chip revision")
+        self.failUnless(retval[0] == 0, "error: Failed to get chip revision")
 
     def test_attach_uart_hci(self):
         """ Test Bluetooth : Attach serial devices via UART HCI to BlueZ stack
@@ -49,7 +49,7 @@ class TestBluetooth(unittest.TestCase):
 
         """
         retval = commands.getstatusoutput("hciattach %s %s" % (self.port, self.options))
-        self.failUnless(retval[0]==0, "error: Failed to attach to bluetooth ")
+        self.failUnless(retval[0] == 0, "error: Failed to attach to bluetooth ")
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

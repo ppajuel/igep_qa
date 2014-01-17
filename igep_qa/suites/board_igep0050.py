@@ -113,7 +113,7 @@ def testsuite_IGEP0050():
         testdescription='Test Audio HDMI: Play a wav file'))
     suite.addTest(TestAudio('test_audio_loopback', 'plughw:1,0',
         'Test Audio JACK: Loopback, sound sent to audio-out should return in audio-in'))
-    suite.addTest(TestHwmon('test_temperature_range', 
+    suite.addTest(TestHwmon('test_temperature_range',
         '/sys/class/hwmon/hwmon0/temp1_input', 25000, 70000,
         'Test CPU TEMP: Check temperature is in range 40-70 degree'))
     suite.addTest(TestI2C('test_i2cdetect', 0, '0x48',
@@ -226,7 +226,7 @@ def testsuite_IGEP0050_RB20():
         testdescription='Test Audio HDMI: Play a wav file'))
     suite.addTest(TestAudio('test_audio_loopback', 'plughw:1,0',
         'Test Audio JACK: Loopback, sound sent to audio-out should return in audio-in'))
-    suite.addTest(TestHwmon('test_temperature_range', 
+    suite.addTest(TestHwmon('test_temperature_range',
         '/sys/class/hwmon/hwmon0/temp1_input', 25000, 50000,
         'Test CPU TEMP: Check temperature is in range 30-60 degree'))
     suite.addTest(TestI2C('test_i2cdetect', 0, '0x48',
@@ -258,7 +258,7 @@ if __name__ == '__main__':
 
     if len(args) == 0:
         # IGEP0050-RB10
-        retval = suite.run(testsuite_IGEP0050())        
+        retval = suite.run(testsuite_IGEP0050())
     elif args[0] == "RB20" :
         # IGEP0050-RB20
         retval = suite.run(testsuite_IGEP0050_RB20())

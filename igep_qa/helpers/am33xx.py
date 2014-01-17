@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """
 This provides various AM33XX/IGEP related helper functions.
 
@@ -20,7 +22,7 @@ def am335x_get_mac_id0():
     mm = QMmap()
     a = "".join(mm.read(addr) for addr in registers)
     # reverse bytes
-    return "".join(reversed([a[i:i+2] for i in range(0, len(a), 2)]))
+    return "".join(reversed([a[i:i + 2] for i in range(0, len(a), 2)]))
 
 def am335x_get_mac_id1():
     """ The AM335x has a pair of unique MAC IDs.
@@ -37,7 +39,7 @@ def am335x_get_mac_id1():
     mm = QMmap()
     a = "".join(mm.read(addr) for addr in registers)
     # reverse bytes
-    return "".join(reversed([a[i:i+2] for i in range(0, len(a), 2)]))
+    return "".join(reversed([a[i:i + 2] for i in range(0, len(a), 2)]))
 
 def cpu_is_am33xx():
     """ Returns True if machine is AM33xx, otherwise returns False

@@ -31,7 +31,7 @@ class TestNetwork(unittest.TestCase):
         - ping
 
     """
-    def __init__(self, testname, ipaddr, serverip, interface, min_throughput = 90):
+    def __init__(self, testname, ipaddr, serverip, interface, min_throughput=90):
         super(TestNetwork, self).__init__(testname)
         self.ipaddr = ipaddr
         self.serverip = serverip
@@ -39,7 +39,7 @@ class TestNetwork(unittest.TestCase):
         self.min_throughput = min_throughput
 
     def setUp(self):
-        # NOT deconfiguring network interfaces in follwing cases 
+        # DO NOT down network interfaces in following cases
         # - If / is an NFS mount
         # - Pinging local address 127.0.0.1
         # Instead of, use an ethernet alias.
