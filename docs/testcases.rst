@@ -38,6 +38,12 @@ Flash
 .. automodule:: igep_qa.tests.qflash
    :members:
 
+GPIO
+----
+
+.. automodule:: igep_qa.tests.qgpio
+   :members:
+
 HWMON
 -----
 
