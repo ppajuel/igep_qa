@@ -50,6 +50,18 @@ HWMON
 .. automodule:: igep_qa.tests.qhwmon
    :members:
 
+Modem
+-----
+
+.. automodule:: igep_qa.tests.qmodem
+   :members:
+
+Network
+-------
+
+.. automodule:: igep_qa.tests.qnetwork
+   :members:
+
 Serial
 ------
 
@@ -66,18 +78,6 @@ USB
 ---
 
 .. automodule:: igep_qa.tests.qusb
-   :members:
-
-Modem
------
-
-.. automodule:: igep_qa.tests.qmodem
-   :members:
-
-Network
--------
-
-.. automodule:: igep_qa.tests.qnetwork
    :members:
 
 WiFi
