@@ -68,6 +68,12 @@ USB
 .. automodule:: igep_qa.tests.qusb
    :members:
 
+Modem
+-----
+
+.. automodule:: igep_qa.tests.qmodem
+   :members:
+
 Network
 -------
 
