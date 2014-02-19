@@ -8,9 +8,11 @@ import unittest
 from igep_qa.runners import dbmysql
 # Test Cases
 from igep_qa.tests.qaudio import TestAudio
+from igep_qa.tests.qi2c import TestI2C
 from igep_qa.tests.qnetwork import TestNetwork
 from igep_qa.tests.qserial import TestSerial
-from igep_qa.tests.qusb import TestUSB
+from igep_qa.tests.qstorage import TestBlockStorage
+from igep_qa.tests.qpower import TestPower
 from igep_qa.tests.qflash import TestFlash
 
 # For every test suite we create an instance of TestSuite and add test case
@@ -69,6 +71,10 @@ def testsuite_IGEP0033():
         mmcargs=setenv bootargs console=${console} autotest=IGEP0033 quiet root=${mmcroot} rootfstype=${mmcrootfstype}
 
     What is tested?
+        - Test Power : Check the maximum acceptable limit of current
+        - Test TPS65910: Check for PMIC in bus 0 at address 0x2d
+        - Test EEPROM: Check for PMIC in bus 0 at address 0x50
+        - Test TDA998x: Check for PMIC in bus 0 at address 0x70
         - Test audio : Play a wav file (user check)
         - Test Serial : ttyO0 Each sent character should return
         - Test USB HOST: Check for this_is_the_musb_hdrc_port file
@@ -85,9 +91,23 @@ def testsuite_IGEP0033():
     config.read('/etc/testsuite.conf')
     # create test suite
     suite = unittest.TestSuite()
-    suite.addTest(TestAudio('test_audio_playwav'))
+    suite.addTest(TestPower('test_max_current',
+                              0.5,
+                              config.get('default', 'ipaddr'),
+                              config.get('default', 'serverip'),
+                              9999,
+                              'eth0'))
+    suite.addTest(TestI2C('test_i2cdetect', 0, '0x2d',
+        'Test TPS65910: Check for PMIC in bus 0 at address 0x2d'))
+    suite.addTest(TestI2C('test_i2cdetect', 0, '0x50',
+        'Test EEPROM: Check for PMIC in bus 0 at address 0x50'))
+    suite.addTest(TestI2C('test_i2cdetect', 0, '0x70',
+        'Test TDA998x: Check for PMIC in bus 0 at address 0x70'))
+    suite.addTest(TestAudio('test_audio_playwav',
+        testdescription='Test Audio HDMI: Play a wav file'))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttyO0"))
-    suite.addTest(TestUSB('test_musb_hdrc'))
+    suite.addTest(TestBlockStorage('test_storage_device', 'usb1/1-1/1-1:1.0',
+        'Test USB HOST 1-1.0: Check for this_is_an_storage_device file'))
     suite.addTest(TestNetwork("test_ping_host",
                                 config.get('default', 'ipaddr'),
                                 config.get('default', 'serverip'),
