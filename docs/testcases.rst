@@ -62,6 +62,12 @@ Network
 .. automodule:: igep_qa.tests.qnetwork
    :members:
 
+Power
+-----
+
+.. automodule:: igep_qa.tests.qpower
+   :members:
+
 Serial
 ------
 

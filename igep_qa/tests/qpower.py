@@ -21,8 +21,9 @@ class TestPower(unittest.TestCase):
         The interface is set up when the test start and set down when finishes.
         As with current environment we can't set down the interface on IGEP0033
         there is a workaround for these boards.
-        TODO:
-            - Remove IGEP0033 where possible.
+
+    TODO:
+        - Remove IGEP0033 where possible.
 
     Keyword arguments:
         - testname : The name of the test to be executed.
