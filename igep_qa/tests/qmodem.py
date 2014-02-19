@@ -23,7 +23,7 @@ class TestModem(unittest.TestCase):
     """
     def __init__(self, testname, on, reset, pwrmon, port, testdescription=''):
         super(TestModem, self).__init__(testname)
-        self.modem = QModemTelit(on, reset, pwrmon, '/dev/ttyO1')
+        self.modem = QModemTelit(on, reset, pwrmon, port)
         # Overwrite test description
         if testdescription:
             self._testMethodDoc = testdescription
