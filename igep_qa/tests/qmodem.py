@@ -43,8 +43,8 @@ class TestModem(unittest.TestCase):
         # Now turn on the modem and send the cpin command
         self.modem.turn_on()
         retval = self.modem.at_cpin(5555)
-        self.failUnless(retval == 0, "failed: Expected 'at+cpin=5555\r\r\nOK"
-                        "\r\n' and received '%s' " % retval)
+        self.failUnless(retval == 0, "failed: Expected '%s' and received '%s' "
+                        % (repr("at+cpin=5555\r\r\nOK\r\n"), repr(retval)))
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

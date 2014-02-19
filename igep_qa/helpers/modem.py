@@ -43,7 +43,7 @@ class QModemTelit:
 
         Return 1 if fail and the modem is OFF, 0 on success
 
-        To turn on the GE865 the pad ON# must be tied low for at least 1 second 
+        To turn on the GE865 the pad ON# must be tied low for at least 1 second
         and then released.
 
         """
@@ -184,15 +184,15 @@ class TestClassQModemTelit(unittest.TestCase):
         self.modem.turn_on()
         # AT command: AT
         retval = self.modem.at()
-        self.failUnless(retval == 0, "Error: Expected 'AT\r\r\nOK\r\n' "
-                        "and received '%s' " % retval)
+        self.failUnless(retval == 0, "Error: Expected '%s' and received '%s' "
+                        % (repr("AT\r\r\nOK\r\n"), repr(retval)))
 
     def test_command_at_cpin(self):
         self.modem.turn_on()
         # AT command: Enter pin
         retval = self.modem.at_cpin(5555)
-        self.failUnless(retval == 0, "Error: Expected 'at+cpin=5555\r\r\nOK"
-                        "\r\n' and received '%s' " % retval)
+        self.failUnless(retval == 0, "Error: Expected '%s' and received '%s' "
+                        % (repr("at+cpin=5555\r\r\nOK\r\n"), repr(retval)))
 
 if __name__ == '__main__':
     unittest.main()
