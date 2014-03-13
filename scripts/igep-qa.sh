@@ -34,6 +34,11 @@ do_start() {
 	echo "Running ${NAME} ..."
 	# TODO: remove sleep and use more elegant solution
 	sleep 5
+	# Set display depth to 16 bits per pixel, otherwise letters in red color
+	# are not printed
+	fbset -depth 16
+	# Clear the tty0 terminal
+	clear > /dev/tty0
 	for x in ${CMDLINE}; do
 		case ${x} in
 			autotest=IGEP0020)
@@ -57,11 +62,6 @@ do_start() {
 				exit ${status};
 				;;
 			autotest=BASE0010)
-				# Set display depth to 16 bits per pixel, otherwise letters in red color
-				# are not printed
-				fbset -depth 16
-				# Clear the tty0 terminal
-				clear > /dev/tty0
 				${PYTHONBIN} ${TESTSUITE}/board_base0010.py >/dev/tty0 2>&1 || status=$?
 				exit ${status};
 				;;
