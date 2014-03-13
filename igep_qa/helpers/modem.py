@@ -169,20 +169,20 @@ class TestClassQModemTelit(unittest.TestCase):
     def test_turning_on_modem(self):
         retval = self.modem.turn_on()
         self.failUnless(retval == 0,
-            "Error: Truning ON the modem, expected value '0' "
+            "Error: Turning ON the modem, expected value '0' "
             "and returned '%s'" % retval)
 
     def test_turning_off_modem(self):
         retval = self.modem.turn_off()
         self.failUnless(retval == 0,
-            "Error: Truning OFF the modem, expected value '0' "
+            "Error: Turning OFF the modem, expected value '0' "
             "and returned '%s'" % retval)
 
     def test_restarting_the_modem(self):
         self.modem.turn_on()
         retval = self.modem.restart()
         self.failUnless(retval == 0,
-            "Error: Truning restarting the modem, expected value '0' "
+            "Error: Turning restarting the modem, expected value '0' "
             "and returned '%s'" % retval)
 
     def test_command_at(self):
