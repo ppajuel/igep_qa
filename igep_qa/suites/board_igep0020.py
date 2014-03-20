@@ -182,7 +182,6 @@ def testsuite_IGEP0020_RC80C01():
 # The main program just runs the test suite in verbose mode
 if __name__ == '__main__':
     args = sys.argv[1:]
-    testresult = TestResult()
 
     if args[0] == "RC80C01" :
         retval = testsuite_IGEP0020_RC80C01()
@@ -191,5 +190,5 @@ if __name__ == '__main__':
         suite = dbmysqlTestRunner(verbosity=2)
         retval = suite.run(testsuite_IGEP0020())
     # return 0 if all is ok, otherwise return the number of failures + errors
-    sys.exit(len(testresult.failures) + len(testresult.errors))
+    sys.exit(len(retval.failures) + len(retval.errors))
 
