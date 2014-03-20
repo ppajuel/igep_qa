@@ -2,7 +2,6 @@
 
 import ConfigParser
 import commands
-import errno
 import sys
 import unittest
 # Test Runners
@@ -32,11 +31,11 @@ def testsuite_IGEP0020():
         [default]
         serverip = 192.168.13.1
         ipaddr = 192.168.13.11
-        
+
         [wireless]
         serverip = 192.168.6.1
         essid = 'IGEP_TEST'
-        
+
         [mysqld]
         user = root
         host = 192.168.13.1
