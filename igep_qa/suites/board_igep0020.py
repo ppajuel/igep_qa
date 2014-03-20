@@ -47,11 +47,10 @@ def testsuite_IGEP0020():
 
     .. code-block:: bash
 
-        # buddy=igepp0022
         board.ei485=no
 
-    Also, make sure getty is not running in any ttyO2 port, modify /etc/inittab
-    file an comment following line:
+    Also, make sure getty is not running in any ttyO2 port when the test runs.
+    If it is necessary modify /etc/inittab file an comment following line:
 
     .. code-block:: ini
 
@@ -118,8 +117,8 @@ def testsuite_IGEP0020_RC80C01():
         host = 192.168.13.1
         database = dbtest
 
-    Make sure getty is not running in any ttyO2 port, modify /etc/inittab
-    file an comment following line:
+    Make sure getty is not running in any ttyO2 port when the test runs.
+    If it is necessary modify /etc/inittab file an comment following line:
 
     .. code-block:: ini
 
