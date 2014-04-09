@@ -97,6 +97,29 @@ class QGpio:
         fd.write(str(value))
         fd.close()
 
+    def get_active_low(self):
+        """ Get active_low value.
+
+        Returns "0" for low level and "1" for high level.
+
+        """
+        fd = open('%s/value' % self.sysfs, 'r')
+        retval = fd.read()
+        fd.close()
+        return int(retval)
+
+    def set_active_low(self, value):
+        """ Set active_low value.
+
+        Keyword arguments:
+            - value: Write any nonzero value to invert the value attribute both
+                     for reading and writing.
+
+        """
+        fd = open('%s/active_low' % self.sysfs, 'w')
+        fd.write(str(value))
+        fd.close()
+
 # -----------------------------------------------------------------------------
 # Test Cases for class TGPIO
 # -----------------------------------------------------------------------------
