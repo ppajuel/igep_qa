@@ -122,7 +122,7 @@ class QModemTelit:
         # Before send any command make sure that the input buffer is empty,
         # otherwise we can return a dirty string.
         if self.port.inWaiting():
-            # Flush input buffer, discarding all it’s contents.
+            # Flush input buffer, discarding all it's contents.
             self.port.flushInput()
         self.port.write(command)
         return self.port.read(255)
