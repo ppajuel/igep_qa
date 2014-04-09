@@ -32,6 +32,12 @@ BASE0010
 .. automodule:: igep_qa.suites.board_base0010
    :members:
 
+SLNK0010
+--------
+
+.. automodule:: igep_qa.suites.board_slnk0010
+   :members:
+
 Example
 -------
 
