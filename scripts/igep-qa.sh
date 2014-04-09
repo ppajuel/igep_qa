@@ -65,6 +65,11 @@ do_start() {
 				${PYTHONBIN} ${TESTSUITE}/board_base0010.py >/dev/tty0 2>&1 || status=$?
 				exit ${status};
 				;;
+			autotest=SLNK0010)
+				${PYTHONBIN} ${TESTSUITE}/board_slnk0010.py >/dev/tty0 2>&1 || status=$?
+				exit ${status};
+				;;
+
 		esac
 	done
 }
