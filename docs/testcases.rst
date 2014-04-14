@@ -32,6 +32,12 @@ Bluetooth
 .. automodule:: igep_qa.tests.qbluetooth
    :members:
 
+Boards
+------
+
+.. automodule:: igep_qa.tests.qboards
+   :members:
+
 Flash
 -----
 
