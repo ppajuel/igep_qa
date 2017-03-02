@@ -11,8 +11,8 @@ setup (name='igep_qa',
                         u'test configurations as well as test execution cycles. It '
                         u'will give readers an overview of validation activities done '
                         u'in any IGEP Technology based devices.',
-       author='Enric Balletbo i Serra',
-       author_email='eballetbo@iseebcn.com',
+       author='Enric Balletbo i Serra and Pau Pajuelo Llagostera',
+       author_email='eballetbo [at] gmail.com and ppajuelo [at] iseebcn.com',
        url='',
        packages = ['igep_qa', 'igep_qa.helpers', 'igep_qa.runners', 'igep_qa.suites', 'igep_qa.tests'],
        data_files = [('igep_qa/contrib', ['contrib/dtmf.wav']),
