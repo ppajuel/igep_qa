@@ -226,6 +226,6 @@ class TextTestResult(unittest.TestResult):
         self.runner.writeUpdate(self.result)
         # db: add new test case to the test suite
         dbdata = { }
-        dbdata['name'] = test.id()
+        dbdata['name'] = test.shortDescription()
         dbdata['result'] = self.result
         self.runner.addNewTestCase(dbdata)
