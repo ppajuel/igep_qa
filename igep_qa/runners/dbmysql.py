@@ -89,6 +89,14 @@ def updatedb(tests):
             return -1
         num = row[0]
 
+        # query sn from server
+        query = ("SELECT number FROM sn ORDER BY id DESC LIMIT 1")
+        cursor.execute(query)
+        row = cursor.fetchone()
+        if row is None:
+            return -1
+        snnum = row[0]
+
         # insert
         if machine_is_igep0020():
             add_testsuite = ("INSERT INTO testsuite"
