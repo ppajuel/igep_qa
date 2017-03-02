@@ -20,6 +20,7 @@ from igep_qa.helpers.common import get_hwaddr
 from igep_qa.helpers.omap import cpu_is_omap5
 from igep_qa.helpers.omap import omap3_get_dieid, omap5_get_dieid
 from igep_qa.helpers.omap import machine_is_igep0020
+from igep_qa.helpers.omap import machine_is_igep0030
 from igep_qa.helpers.omap import machine_is_igep0032
 
 PASS = '\033[32mPASS\033[0m\n'
@@ -99,6 +100,11 @@ def updatedb(tests):
 
         # insert
         if machine_is_igep0020():
+            add_testsuite = ("INSERT INTO testsuite"
+                "(datetime, of, sn, dieid, mac) "
+                " VALUES (NOW(), %s, %s, %s, %s)")
+            data_testsuite = (num, snnum, omap3_get_dieid(), get_hwaddr("wlan0"))
+        elif machine_is_igep0030():
             add_testsuite = ("INSERT INTO testsuite"
                 "(datetime, of, sn, dieid, mac) "
                 " VALUES (NOW(), %s, %s, %s, %s)")
