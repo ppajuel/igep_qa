@@ -100,9 +100,9 @@ def updatedb(tests):
         # insert
         if machine_is_igep0020():
             add_testsuite = ("INSERT INTO testsuite"
-                "(datetime, of, dieid, mac) "
-                " VALUES (NOW(), %s, %s, %s)")
-            data_testsuite = (num, omap3_get_dieid(), get_hwaddr("wlan0"))
+                "(datetime, of, sn, dieid, mac) "
+                " VALUES (NOW(), %s, %s, %s, %s)")
+            data_testsuite = (num, snnum, omap3_get_dieid(), get_hwaddr("wlan0"))
         elif machine_is_igep0032():
             add_testsuite = ("INSERT INTO testsuite"
                 "(datetime, of, dieid, mac) "
