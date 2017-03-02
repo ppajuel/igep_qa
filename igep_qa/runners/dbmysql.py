@@ -20,39 +20,16 @@ from igep_qa.helpers.common import get_hwaddr
 from igep_qa.helpers.omap import cpu_is_omap5
 from igep_qa.helpers.omap import omap3_get_dieid, omap5_get_dieid
 from igep_qa.helpers.omap import machine_is_igep0020
+from igep_qa.helpers.omap import machine_is_igep0030
 from igep_qa.helpers.omap import machine_is_igep0032
 
 PASS = '\033[32mPASS\033[0m\n'
 FAIL = '\033[31mFAIL\033[0m\n'
 ERROR = '\033[31mERROR\033[0m\n'
 
-FANCYFAIL = """--------------------------------
-\033[31m################################\033[0m
+FANCYFAIL = "AUTOMATIC TEST FINISHED\n"
 
-\033[31m########    ###    #### ##      \033[0m
-\033[31m##         ## ##    ##  ##      \033[0m
-\033[31m##        ##   ##   ##  ##      \033[0m
-\033[31m######   ##     ##  ##  ##      \033[0m
-\033[31m##       #########  ##  ##      \033[0m
-\033[31m##       ##     ##  ##  ##      \033[0m
-\033[31m##       ##     ## #### ########\033[0m
-
-\033[31m################################\033[0m
-"""
-
-FANCYPASS = """-------------------------------------
-\033[32m#####################################\033[0m
-
-\033[32m########     ###     ######   ###### \033[0m
-\033[32m##     ##   ## ##   ##    ## ##    ##\033[0m
-\033[32m##     ##  ##   ##  ##       ##      \033[0m
-\033[32m########  ##     ##  ######   ###### \033[0m
-\033[32m##        #########       ##       ##\033[0m
-\033[32m##        ##     ## ##    ## ##    ##\033[0m
-\033[32m##        ##     ##  ######   ###### \033[0m
-
-\033[32m#####################################\033[0m
-"""
+FANCYPASS = "AUTOMATIC TEST FINISHED\n"
 
 def updatedb(tests):
     # parse testsuite.conf configuration file
@@ -89,12 +66,25 @@ def updatedb(tests):
             return -1
         num = row[0]
 
+        # query sn from server
+        query = ("SELECT number FROM sn ORDER BY id DESC LIMIT 1")
+        cursor.execute(query)
+        row = cursor.fetchone()
+        if row is None:
+            return -1
+        snnum = row[0]
+
         # insert
         if machine_is_igep0020():
             add_testsuite = ("INSERT INTO testsuite"
-                "(datetime, of, dieid, mac) "
-                " VALUES (NOW(), %s, %s, %s)")
-            data_testsuite = (num, omap3_get_dieid(), get_hwaddr("wlan0"))
+                "(datetime, of, sn, dieid, mac) "
+                " VALUES (NOW(), %s, %s, %s, %s)")
+            data_testsuite = (num, snnum, omap3_get_dieid(), get_hwaddr("wlan0"))
+        elif machine_is_igep0030():
+            add_testsuite = ("INSERT INTO testsuite"
+                "(datetime, of, sn, dieid, mac) "
+                " VALUES (NOW(), %s, %s, %s, %s)")
+            data_testsuite = (num, snnum, omap3_get_dieid(), get_hwaddr("wlan0"))
         elif machine_is_igep0032():
             add_testsuite = ("INSERT INTO testsuite"
                 "(datetime, of, dieid, mac) "
@@ -102,9 +92,9 @@ def updatedb(tests):
             data_testsuite = (num, omap3_get_dieid(), '')
         elif cpu_is_am33xx():
             add_testsuite = ("INSERT INTO testsuite"
-                "(datetime, of, dieid, mac) "
-                " VALUES (NOW(), %s, %s, %s)")
-            data_testsuite = (num, am335x_get_mac_id0(), am335x_get_mac_id1())
+                "(datetime, of, sn, dieid, mac) "
+                " VALUES (NOW(), %s, %s, %s, %s)")
+            data_testsuite = (num, snnum, am335x_get_mac_id0(), am335x_get_mac_id1())
         elif cpu_is_omap5():
             add_testsuite = ("INSERT INTO testsuite"
                 "(datetime, of, dieid, mac) "
@@ -226,6 +216,6 @@ class TextTestResult(unittest.TestResult):
         self.runner.writeUpdate(self.result)
         # db: add new test case to the test suite
         dbdata = { }
-        dbdata['name'] = test.id()
+        dbdata['name'] = test.shortDescription()
         dbdata['result'] = self.result
         self.runner.addNewTestCase(dbdata)

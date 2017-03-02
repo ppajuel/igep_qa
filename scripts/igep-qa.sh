@@ -5,11 +5,12 @@
 # Should-Start:
 # Required-Stop:
 # Should-Stop:
-# Default-Start:     2 5
+# Default-Start:     5
 # Default-Stop:
 # Short-Description: IGEP-QA init script for IGEP-technology devices.
 # Description:       This script should be placed in /etc/init.d
 ### END INIT INFO
+#set -x
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
@@ -69,7 +70,14 @@ do_start() {
 				${PYTHONBIN} ${TESTSUITE}/board_slnk0010.py >/dev/tty0 2>&1 || status=$?
 				exit ${status};
 				;;
-
+			autotest=IGEP0034)
+				read BOARDMODEL < /sys/firmware/devicetree/base/model
+				if [ "$BOARDMODEL" = "ISEE IGEP SMARC AM3354 Kit" ]; then
+					exec sh -c "${PYTHONBIN} ${TESTSUITE}/board_igep0034.py" >/dev/tty1 2>&1 || status=$?
+					exit ${status};
+				fi
+				# TODO: ISEE IGEP SMARC AM3352 Lite Kit
+				;;
 		esac
 	done
 }

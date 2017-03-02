@@ -36,13 +36,13 @@ In order to generate the documentation you will need to have following packages:
 
 * python-sphinx
 * python-pygments
-* mysql-connector-python (>= 1.0.12)
+* python-mysql.connector (old mysql-connector-python) (>= 1.0.12)
 
 The mysql-connector-python is available at:
 
 * http://dev.mysql.com/downloads/connector/python/
 
-Once thre requirements were installed go to docs directory and run:
+Once the requirements were installed go to docs directory and run:
 
 .. code-block:: none
 
@@ -51,5 +51,6 @@ Once thre requirements were installed go to docs directory and run:
 Authors
 =======
 
-* Enric Balletbo i Serra <eballetbo@iseebcn.com>
+* Enric Balletbo i Serra <eballetbo [at] gmail.com>
+* Pau Pajuelo Llagostera <ppajuelo [at] iseebcn.com>
 
