@@ -92,9 +92,9 @@ def updatedb(tests):
             data_testsuite = (num, omap3_get_dieid(), '')
         elif cpu_is_am33xx():
             add_testsuite = ("INSERT INTO testsuite"
-                "(datetime, of, dieid, mac) "
-                " VALUES (NOW(), %s, %s, %s)")
-            data_testsuite = (num, am335x_get_mac_id0(), am335x_get_mac_id1())
+                "(datetime, of, sn, dieid, mac) "
+                " VALUES (NOW(), %s, %s, %s, %s)")
+            data_testsuite = (num, snnum, am335x_get_mac_id0(), am335x_get_mac_id1())
         elif cpu_is_omap5():
             add_testsuite = ("INSERT INTO testsuite"
                 "(datetime, of, dieid, mac) "
