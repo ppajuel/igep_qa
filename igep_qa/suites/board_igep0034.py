@@ -111,6 +111,9 @@ def testsuite_IGEP0034():
         'Test TPS65910: Check for PMIC in bus 1 at address 0x2d'))
     suite.addTest(TestI2C('test_i2cdetect', 1, '0x50',
         'Test EEPROM: Check for PMIC in bus 1 at address 0x50'))
+    suite.addTest(TestSerial("test_serial_loopback", "/dev/ttyO0"))
+    suite.addTest(TestSerial("test_serial_loopback", "/dev/ttyO3"))
+    suite.addTest(TestSerial("test_serial_loopback", "/dev/ttyO5"))
     return suite
 
 # The main program just runs the test suite in verbose mode
