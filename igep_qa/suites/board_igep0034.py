@@ -9,6 +9,7 @@ from igep_qa.runners import dbmysql
 # Test Cases
 from igep_qa.tests.qi2c import TestI2C
 from igep_qa.tests.qserial import TestSerial
+from igep_qa.tests.qstorage import TestBlockStorage
 
 # For every test suite we create an instance of TestSuite and add test case
 # instances. When all tests have been added, the suite can be passed to a test
@@ -85,9 +86,9 @@ def testsuite_IGEP0034():
         - Test Serial : ttyO0 Each sent character should return
         - Test Serial : ttyO3 Each sent character should return
         - Test Serial : ttyO5 Each sent character should return
-        - Test USB HOST 1-J600A : Check for this_is_an_storage_device file
-        - Test USB HOST 2-J600B : Check for this_is_an_storage_device file
-        - Test USB HOST 3-J601 : Check for this_is_an_storage_device file
+        - Test USB HOST 2-1.1 : Check for this_is_an_storage_device file
+        - Test USB HOST 2-1.2 : Check for this_is_an_storage_device file
+        - Test USB HOST 2-1.3 : Check for this_is_an_storage_device file
         - Test USB OTG J602: Check for this_is_an_storage_device file
         - Test Fast Ethernet : Ping the IP address of a remote host
         - Test WiFi: Ping the IP address of a remote AP
@@ -114,6 +115,12 @@ def testsuite_IGEP0034():
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttyO0"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttyO3"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttyO5"))
+    suite.addTest(TestBlockStorage('test_storage_device', 'usb2/2-1/2-1.1',
+        'Test USB HOST 2-1.1: Check for this_is_an_storage_device file'))
+    suite.addTest(TestBlockStorage('test_storage_device', 'usb2/2-1/2-1.2',
+        'Test USB HOST 2-1.2: Check for this_is_an_storage_device file'))
+    suite.addTest(TestBlockStorage('test_storage_device', 'usb2/2-1/2-1.3',
+        'Test USB HOST 2-1.3: Check for this_is_an_storage_device file'))
     return suite
 
 # The main program just runs the test suite in verbose mode
