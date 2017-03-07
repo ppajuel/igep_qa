@@ -71,6 +71,9 @@ do_start() {
 				exit ${status};
 				;;
 			autotest=IGEP0034)
+				# FIXME: Enable USB Host power to avoid "musb-hdrc musb-hdrc.2.auto: Babble" issue
+				echo enabled > /sys/devices/platform/regulators/regulators\:fixedregulator\@4/regulator/regulator.19/userspace-consumer\@1-usb_power/state
+				sleep 4
 				read BOARDMODEL < /sys/firmware/devicetree/base/model
 				if [ "$BOARDMODEL" = "ISEE IGEP SMARC AM3354 Kit" ]; then
 					exec sh -c "${PYTHONBIN} ${TESTSUITE}/board_igep0034.py" >/dev/tty1 2>&1 || status=$?
