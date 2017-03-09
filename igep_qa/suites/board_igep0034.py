@@ -6,10 +6,13 @@ import sys
 import unittest
 # Test Runners
 from igep_qa.runners import dbmysql
+# Test Helpers
+from igep_qa.helpers import am33xx
 # Test Cases
 from igep_qa.tests.qi2c import TestI2C
 from igep_qa.tests.qserial import TestSerial
 from igep_qa.tests.qstorage import TestBlockStorage
+from igep_qa.tests.qaudio import TestAudio
 
 # For every test suite we create an instance of TestSuite and add test case
 # instances. When all tests have been added, the suite can be passed to a test
@@ -82,7 +85,7 @@ def testsuite_IGEP0034():
         - Test TPS65910: Check for PMIC in bus 1 at address 0x2d
         - Test TPS65910 RTC: Check for PMIC RTC is active (RTC_STATUS_REG:RUN bit)
         - Test EEPROM: Check for PMIC in bus 1 at address 0x50
-        - Test Audio : IN/OUT loopback using headphone and line-in signals
+        - Test Audio : Loopback, sound sent to audio-out should return in audio-in
         - Test Serial : ttyO0 Each sent character should return
         - Test Serial : ttyO3 Each sent character should return
         - Test Serial : ttyO5 Each sent character should return
@@ -121,12 +124,15 @@ def testsuite_IGEP0034():
         'Test USB HOST 2-1.2: Check for this_is_an_storage_device file'))
     suite.addTest(TestBlockStorage('test_storage_device', 'usb2/2-1/2-1.3',
         'Test USB HOST 2-1.3: Check for this_is_an_storage_device file'))
+    suite.addTest(TestAudio('test_audio_loopback'))
     return suite
 
 # The main program just runs the test suite in verbose mode
 if __name__ == '__main__':
     # TODO : Set amixer configuration
     args = sys.argv[1:]
+    # Do some things to prepare the test environment.
+    am33xx.igep0034_set_headset_amixer_settings(0)
     if len(args) == 0:
         # IGEP0034-RA20 (FULL)
         # By default run using the dbmysql runner.
