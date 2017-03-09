@@ -6,6 +6,7 @@ This provides various AM33XX/IGEP related helper functions.
 """
 
 from igep_qa.helpers.common import QMmap, QCpuinfo
+import commands
 
 def am335x_get_mac_id0():
     """ The AM335x has a pair of unique MAC IDs.
@@ -50,3 +51,12 @@ def cpu_is_am33xx():
         return True
     # otherwise
     return False
+
+def igep0034_set_headset_amixer_settings(headset):
+    """ Set amixer settings to playback/capture via headset,
+
+    Make sure that the following amixer settings are done for the corresponding
+    card (check the card no. by running the command cat /proc/asound/cards).
+
+    """
+    commands.getoutput("amixer -c %s sset 'PCM' 127" % headset)

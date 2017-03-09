@@ -57,7 +57,7 @@ class TestAudio(unittest.TestCase):
         """
         # Ensure requirements are installed.
         required = ["aplay", "arecord", "multimon"]
-        files = "/usr/share/igep_qa/contrib/dtmf.wav"
+        files = "/usr/igep_qa/contrib/dtmf.wav"
         for req in required:
             if not is_in_path(req):
                 raise Exception("Can't find %s" % req)
@@ -65,7 +65,7 @@ class TestAudio(unittest.TestCase):
             raise Exception("Can't find %s" % files)
         commands.getoutput("rm -f /tmp/recorded.wav")
         commands.getoutput("aplay %s -t wav -v "
-                           "/usr/share/igep_qa/contrib/dtmf.wav & arecord %s "
+                           "/usr/igep_qa/contrib/dtmf.wav & arecord %s "
                            "-t wav -c 1 -r 8000 -f S16_LE -d 5 -v "
                            "/tmp/recorded.wav" % (self.device, self.device))
         commands.getoutput("multimon -t wav -a DTMF recorded.wav | grep 'DTMF: 5'")
@@ -92,14 +92,14 @@ class TestAudio(unittest.TestCase):
         """
         # Ensure requirements are installed.
         required = ["aplay"]
-        files = "/usr/share/igep_qa/contrib/test.wav"
+        files = "/usr/igep_qa/contrib/test.wav"
         for req in required:
             if not is_in_path(req):
                 raise Exception("Can't find %s" % req)
         if not os.path.isfile(files):
             raise Exception("Can't find %s" % files)
         retval = commands.getstatusoutput("aplay %s -t wav "
-                                          "/usr/share/igep_qa/contrib/test.wav"
+                                          "/usr/igep_qa/contrib/test.wav"
                                            % self.device)
         self.failUnless(retval[0] == 0, "failed: Playing test.wav.")
 
