@@ -93,7 +93,7 @@ def testsuite_IGEP0034():
         - Test USB HOST 2-1.1 : Check for this_is_an_storage_device file
         - Test USB HOST 2-1.2 : Check for this_is_an_storage_device file
         - Test USB HOST 2-1.3 : Check for this_is_an_storage_device file
-        - Test USB OTG J602: Check for this_is_an_storage_device file
+        - Test USB OTG 1-1:1.0: Check for this_is_an_storage_device file
         - Test Network (eth0) : Ping the IP address of a remote host
         - Test WiFi: Ping the IP address of a remote AP
         - Test Bluetooth: Check Bluetooth at ttyO2
@@ -130,6 +130,8 @@ def testsuite_IGEP0034():
                             config.get('default', 'ipaddr'),
                             config.get('default', 'serverip'),
                             'eth0'))
+    suite.addTest(TestBlockStorage('test_storage_device', 'usb1/1-1/1-1:1.0',
+        'Test USB OTG 1-1:1.0: Check for this_is_an_storage_device file'))
     return suite
 
 # The main program just runs the test suite in verbose mode
