@@ -13,6 +13,7 @@ from igep_qa.tests.qi2c import TestI2C
 from igep_qa.tests.qserial import TestSerial
 from igep_qa.tests.qstorage import TestBlockStorage
 from igep_qa.tests.qaudio import TestAudio
+from igep_qa.tests.qnetwork import TestNetwork
 
 # For every test suite we create an instance of TestSuite and add test case
 # instances. When all tests have been added, the suite can be passed to a test
@@ -93,7 +94,7 @@ def testsuite_IGEP0034():
         - Test USB HOST 2-1.2 : Check for this_is_an_storage_device file
         - Test USB HOST 2-1.3 : Check for this_is_an_storage_device file
         - Test USB OTG J602: Check for this_is_an_storage_device file
-        - Test Fast Ethernet : Ping the IP address of a remote host
+        - Test Network (eth0) : Ping the IP address of a remote host
         - Test WiFi: Ping the IP address of a remote AP
         - Test Bluetooth: Check Bluetooth at ttyO2
         - Test Flash: detect firmware flashed
@@ -125,6 +126,10 @@ def testsuite_IGEP0034():
     suite.addTest(TestBlockStorage('test_storage_device', 'usb2/2-1/2-1.3',
         'Test USB HOST 2-1.3: Check for this_is_an_storage_device file'))
     suite.addTest(TestAudio('test_audio_loopback'))
+    suite.addTest(TestNetwork("test_ping_host",
+                            config.get('default', 'ipaddr'),
+                            config.get('default', 'serverip'),
+                            'eth0'))
     return suite
 
 # The main program just runs the test suite in verbose mode
