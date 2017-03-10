@@ -21,6 +21,7 @@ class TestWiFi(unittest.TestCase):
         - essid: The EESID to be connected.
         - serverip : The remote IP address.
         - ipaddr : The local IP address (some tests acquire the ip via dhcp).
+        - password : Remote WiFi password (some tests don't need them).
 
     Prerequisite commands:
         - iwconfig
@@ -29,11 +30,12 @@ class TestWiFi(unittest.TestCase):
         - ping
 
     """
-    def __init__(self, testname, essid, serverip, ipaddr=""):
+    def __init__(self, testname, serverip, essid, ipaddr="", password=""):
         super(TestWiFi, self).__init__(testname)
         self.serverip = serverip
         self.essid = essid
         self.ipaddr = ipaddr
+        self.password = password
 
     def test_ping_host(self):
         """  Test WiFi : Ping the IP address of a remote host
@@ -114,6 +116,27 @@ class TestWiFi(unittest.TestCase):
         self.failUnless(retval[0] == 0, "failed: Pinging to %s" % self.serverip)
         # retval = commands.getstatusoutput("ip link set wlan0 down")
         # self.failUnless(retval[0] == 0, "failed: Can't down interface wlan0")
+
+    def test_ap_with_wep_encryption(self):
+        """  Test WiFi : Ping the IP address of a remote host (ap+wep)
+
+        Type: Functional
+
+        Description:
+            The test connects to hotspot in AP mode with WEP encryption,
+            then tries to send a echo request ("ping") that is expected to
+            be received back in an echo reply.
+        """
+        retval = commands.getstatusoutput("ifconfig wlan0 up")
+        self.failUnless(retval[0] == 0, "failed: No wlan0 interface found.")
+        retval = commands.getstatusoutput("ifconfig wlan0 %s" % self.ipaddr)
+        self.failUnless(retval[0] == 0, "failed: wlan0 interface cannot set ipaddr.")
+        retval = commands.getstatusoutput("iw wlan0 connect %s key 0:%s" % (self.essid, self.password))
+        self.failUnless(retval[0] == 0, "failed: wlan0 cannot connect to hotspot: %s." % self.essid)
+        retval = commands.getstatusoutput("ping -I wlan0 -c 5 -s 8096 %s" % self.serverip)
+        self.failUnless(retval[0] == 0, "failed: Pinging to %s" % self.serverip)
+        retval = commands.getstatusoutput("ifconfig wlan0 down")
+        self.failUnless(retval[0] == 0, "failed: Can't down interface wlan0.")
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

@@ -14,6 +14,7 @@ from igep_qa.tests.qserial import TestSerial
 from igep_qa.tests.qstorage import TestBlockStorage
 from igep_qa.tests.qaudio import TestAudio
 from igep_qa.tests.qnetwork import TestNetwork
+from igep_qa.tests.qwifi import TestWiFi
 
 # For every test suite we create an instance of TestSuite and add test case
 # instances. When all tests have been added, the suite can be passed to a test
@@ -36,6 +37,12 @@ def testsuite_IGEP0034():
         user = root
         host = 192.168.13.1
         database = dbtest
+
+        [wireless]
+        serverip = 192.168.1.1
+        ipaddr = 192.168.1.60
+        essid = 'your_essid'
+        password = 'your_password'
 
     To run the autotest you should replace am335x-igep-base0040.dtb
     with and special version with usb0 dr_mode parameter set to "host",
@@ -95,7 +102,7 @@ def testsuite_IGEP0034():
         - Test USB HOST 2-1.3 : Check for this_is_an_storage_device file
         - Test USB OTG 1-1:1.0: Check for this_is_an_storage_device file
         - Test Network (eth0) : Ping the IP address of a remote host
-        - Test WiFi: Ping the IP address of a remote AP
+        - Test WiFi : Ping the IP address of a remote host (adhoc+wep)
         - Test Bluetooth: Check Bluetooth at ttyO2
         - Test Flash: detect firmware flashed
         - Test ADC: get  AIN0-AIN6 values
@@ -132,6 +139,11 @@ def testsuite_IGEP0034():
                             'eth0'))
     suite.addTest(TestBlockStorage('test_storage_device', 'usb1/1-1/1-1:1.0',
         'Test USB OTG 1-1:1.0: Check for this_is_an_storage_device file'))
+    suite.addTest(TestWiFi("test_ap_with_wep_encryption",
+                           config.get('wireless', 'serverip'),
+                           config.get('wireless', 'essid'),
+                           config.get('wireless', 'ipaddr'),
+                           config.get('wireless', 'password')))
     return suite
 
 # The main program just runs the test suite in verbose mode
