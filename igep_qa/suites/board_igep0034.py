@@ -17,6 +17,7 @@ from igep_qa.tests.qaudio import TestAudio
 from igep_qa.tests.qnetwork import TestNetwork
 from igep_qa.tests.qwifi import TestWiFi
 from igep_qa.tests.qflash import TestFlash
+from igep_qa.tests.qbluetooth import TestBluetooth
 
 # For every test suite we create an instance of TestSuite and add test case
 # instances. When all tests have been added, the suite can be passed to a test
@@ -105,7 +106,7 @@ def testsuite_IGEP0034():
         - Test USB OTG 1-1:1.0: Check for this_is_an_storage_device file
         - Test Network (eth0) : Ping the IP address of a remote host
         - Test WiFi : Ping the IP address of a remote host (adhoc+wep)
-        - Test Bluetooth: Check Bluetooth at ttyO2
+        - Test Bluetooth : Get Link Manager Protocol (LMP) revision
         - Test ubifsfirmware : Read some files from UBIFS partition to ensure firmware flashed
         - Test ADC: get  AIN0-AIN6 values
         - Test SD-card : Test is running from SD-card (implicit)
@@ -152,6 +153,7 @@ def testsuite_IGEP0034():
                             config.get('wireless', 'essid'),
                             config.get('wireless', 'ipaddr'),
                             config.get('wireless', 'password')))
+    suite.addTest(TestBluetooth('test_get_lmp_revision','','','0xac7c'))
     suite.addTest(TestFlash('test_ubifsfirmware', '/dev/mtd3',
         '/boot/zImage',
         '/boot/MLO',
