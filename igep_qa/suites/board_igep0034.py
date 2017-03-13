@@ -15,6 +15,7 @@ from igep_qa.tests.qstorage import TestBlockStorage
 from igep_qa.tests.qaudio import TestAudio
 from igep_qa.tests.qnetwork import TestNetwork
 from igep_qa.tests.qwifi import TestWiFi
+from igep_qa.tests.qflash import TestFlash
 
 # For every test suite we create an instance of TestSuite and add test case
 # instances. When all tests have been added, the suite can be passed to a test
@@ -104,7 +105,7 @@ def testsuite_IGEP0034():
         - Test Network (eth0) : Ping the IP address of a remote host
         - Test WiFi : Ping the IP address of a remote host (adhoc+wep)
         - Test Bluetooth: Check Bluetooth at ttyO2
-        - Test Flash: detect firmware flashed
+        - Test ubifsfirmware : Read some files from UBIFS partition to ensure firmware flashed
         - Test ADC: get  AIN0-AIN6 values
         - Test SD-card : Test is running from SD-card (implicit)
         - Test HDMI : Test shows the test result (implicit)
@@ -144,6 +145,11 @@ def testsuite_IGEP0034():
                            config.get('wireless', 'essid'),
                            config.get('wireless', 'ipaddr'),
                            config.get('wireless', 'password')))
+    suite.addTest(TestFlash('test_ubifsfirmware', '/dev/mtd3',
+        '/boot/zImage',
+        '/boot/MLO',
+        '/boot/u-boot.img'))
+
     return suite
 
 # The main program just runs the test suite in verbose mode
