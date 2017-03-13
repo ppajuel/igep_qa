@@ -9,6 +9,7 @@ from igep_qa.runners import dbmysql
 # Test Helpers
 from igep_qa.helpers import am33xx
 # Test Cases
+from igep_qa.tests.qpower import TestPower
 from igep_qa.tests.qi2c import TestI2C
 from igep_qa.tests.qserial import TestSerial
 from igep_qa.tests.qstorage import TestBlockStorage
@@ -120,6 +121,16 @@ def testsuite_IGEP0034():
     config.read('/etc/testsuite.conf')
     # create test suite
     suite = unittest.TestSuite()
+    suite.addTest(TestNetwork("test_ping_host",
+                            config.get('default', 'ipaddr'),
+                            config.get('default', 'serverip'),
+                            'eth0'))
+    suite.addTest(TestPower('test_max_current',
+                            0.75,
+                            config.get('default', 'ipaddr'),
+                            config.get('default', 'serverip'),
+                            9999,
+                            'eth0'))
     suite.addTest(TestI2C('test_i2cdetect', 1, '0x2d',
         'Test TPS65910: Check for PMIC in bus 1 at address 0x2d'))
     suite.addTest(TestI2C('test_i2cdetect', 1, '0x50',
@@ -134,17 +145,13 @@ def testsuite_IGEP0034():
     suite.addTest(TestBlockStorage('test_storage_device', 'usb2/2-1/2-1.3',
         'Test USB HOST 2-1.3: Check for this_is_an_storage_device file'))
     suite.addTest(TestAudio('test_audio_loopback'))
-    suite.addTest(TestNetwork("test_ping_host",
-                            config.get('default', 'ipaddr'),
-                            config.get('default', 'serverip'),
-                            'eth0'))
     suite.addTest(TestBlockStorage('test_storage_device', 'usb1/1-1/1-1:1.0',
         'Test USB OTG 1-1:1.0: Check for this_is_an_storage_device file'))
     suite.addTest(TestWiFi("test_ap_with_wep_encryption",
-                           config.get('wireless', 'serverip'),
-                           config.get('wireless', 'essid'),
-                           config.get('wireless', 'ipaddr'),
-                           config.get('wireless', 'password')))
+                            config.get('wireless', 'serverip'),
+                            config.get('wireless', 'essid'),
+                            config.get('wireless', 'ipaddr'),
+                            config.get('wireless', 'password')))
     suite.addTest(TestFlash('test_ubifsfirmware', '/dev/mtd3',
         '/boot/zImage',
         '/boot/MLO',
