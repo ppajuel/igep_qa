@@ -16,15 +16,6 @@ from igep_qa.helpers import am33xx
 class TestPower(unittest.TestCase):
     """Generic tests for power interfaces.
 
-    .. warning::
-
-        The interface is set up when the test start and set down when finishes.
-        As with current environment we can't set down the interface on IGEP0033
-        there is a workaround for these boards.
-
-    TODO:
-        - Remove IGEP0033 where possible.
-
     Keyword arguments:
         - testname : The name of the test to be executed.
         - current_max : The maximum value of amperes.
@@ -46,13 +37,6 @@ class TestPower(unittest.TestCase):
         self.interface = interface
 
     def setUp(self):
-        # DO NOT down network interfaces in following cases
-        # - If / is an NFS mount
-        # - Pinging local address 127.0.0.1
-        # - Workaround for IGEP0033 boards.
-        # Instead of, use an ethernet alias.
-        if (common.is_nfsroot() or self.serverip == "127.0.0.1" or am33xx.cpu_is_am33xx()):
-            self.interface = "%s:0" % self.interface
         # Set up the interface
         commands.getstatusoutput("ifconfig %s %s"
                                 "" % (self.interface, self.ipaddr))
