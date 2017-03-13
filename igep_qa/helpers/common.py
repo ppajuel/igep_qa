@@ -10,6 +10,7 @@ import mmap
 import os
 import struct
 import socket
+import commands
 
 def is_in_path(name):
     """ Return True if name refers to an existing file in path, otherwise 
@@ -158,3 +159,10 @@ class QMmap:
         mm.close()
         os.close(fd)
         return "%08X" % retval[0]
+
+class set_WiLink_bluetooth:
+    """ Simple helper class to enable WiLink bluetooth
+
+    """
+    commands.getoutput("modprobe btwilink")
+    commands.getoutput("hciconfig hci0 up")
