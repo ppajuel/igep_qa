@@ -76,8 +76,13 @@ do_start() {
 				sleep 4
 				read BOARDMODEL < /sys/firmware/devicetree/base/model
 				if [ "$BOARDMODEL" = "ISEE IGEP SMARC AM3354 Kit" ]; then
-					exec sh -c "${PYTHONBIN} ${TESTSUITE}/board_igep0034.py" >/dev/tty1 2>&1 || status=$?
-					exit ${status};
+					# fb-test is a dependency for IGEP0034 (FULL) test
+					if [ -f /usr/bin/fb-test ]; then
+						exec sh -c "${PYTHONBIN} ${TESTSUITE}/board_igep0034.py" >/dev/tty1 2>&1 || status=$?
+						exit ${status};
+					else
+						echo "${NAME}: Error /usr/bin/fb-test is not found. Aborted IGEP0034 (FULL) test."
+					fi
 				fi
 				# TODO: ISEE IGEP SMARC AM3352 Lite Kit
 				;;
