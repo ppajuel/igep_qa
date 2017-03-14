@@ -120,6 +120,38 @@ class QGpio:
         fd.write(str(value))
         fd.close()
 
+    def get_edge(self):
+        """ Get GPIO edge.
+
+        Returns: "none", "rising", "falling" or "both"
+
+        """
+        try:
+            fd = open("%s/edge" % self.sysfs, "r")
+            retval = fd.read()
+            fd.close()
+            return retval
+        except IOError:
+            if self.debug == True:
+                print "gpio%s/edge not found, check edge capabilites" % self.gpio
+            return ""
+
+    def set_edge(self, edge):
+        """Set GPIO edge.
+
+        Keyword arguments:
+            - edge: must be "none", "rising", "falling" or "both".
+
+        """
+        if not os.path.exists("%s/edge" % self.sysfs):
+            if self.debug == True:
+                print "edge for GPIO %s not found, skipping" % self.gpio
+            pass
+        else:
+            fd = open('%s/edge' % self.sysfs, 'w')
+            fd.write(edge)
+            fd.close()
+
 # -----------------------------------------------------------------------------
 # Test Cases for class TGPIO
 # -----------------------------------------------------------------------------
@@ -155,6 +187,30 @@ class TestClassQGpio(unittest.TestCase):
         retval = self.gpio.get_direction()
         self.failUnless(retval == 'in\n',
             "Error: Expected value 'in' and readed %s" % retval)
+
+    def test_set_edge_to_none(self):
+        self.gpio.set_edge("none")
+        retval = self.gpio.get_edge()
+        self.failUnless(retval == 'none\n',
+            "Error: Expected value 'none' and readed %s" % retval)
+
+    def test_set_edge_to_rising(self):
+        self.gpio.set_edge("rising")
+        retval = self.gpio.get_edge()
+        self.failUnless(retval == 'rising\n',
+            "Error: Expected value 'rising' and readed %s" % retval)
+
+    def test_set_edge_to_falling(self):
+        self.gpio.set_edge("falling")
+        retval = self.gpio.get_edge()
+        self.failUnless(retval == 'falling\n',
+            "Error: Expected value 'falling' and readed %s" % retval)
+
+    def test_set_edge_to_both(self):
+        self.gpio.set_edge("both")
+        retval = self.gpio.get_edge()
+        self.failUnless(retval == 'both\n',
+            "Error: Expected value 'both' and readed %s" % retval)
 
 if __name__ == '__main__':
     unittest.main()
