@@ -9,6 +9,7 @@ from igep_qa.runners import dbmysql
 # Test Helpers
 from igep_qa.helpers import am33xx
 # Test Cases
+from igep_qa.tests.qbutton import TestButton
 from igep_qa.tests.qpower import TestPower
 from igep_qa.tests.qi2c import TestI2C
 from igep_qa.tests.qserial import TestSerial
@@ -92,6 +93,7 @@ def testsuite_IGEP0034():
         ln -sf /usr/bin/igep-qa.sh /etc/rc5.d/S99igep-qa.sh
 
     What is tested?
+        - Test Button Fbtest : Read User button action and display fb-test pattern
         - Test Power : Check the maximum acceptable limit of current
         - Test TPS65910: Check for PMIC in bus 1 at address 0x2d
         - Test TPS65910 RTC: Check for PMIC RTC is active (RTC_STATUS_REG:RUN bit)
@@ -122,6 +124,7 @@ def testsuite_IGEP0034():
     config.read('/etc/testsuite.conf')
     # create test suite
     suite = unittest.TestSuite()
+    suite.addTest(TestButton("test_button_fbtest", 104))
     suite.addTest(TestNetwork("test_ping_host",
                             config.get('default', 'ipaddr'),
                             config.get('default', 'serverip'),
