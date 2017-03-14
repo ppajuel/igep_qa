@@ -38,6 +38,12 @@ Boards
 .. automodule:: igep_qa.tests.qboards
    :members:
 
+Button
+------
+
+.. automodule:: igep_qa.tests.qbutton
+   :members:
+
 Flash
 -----
 
