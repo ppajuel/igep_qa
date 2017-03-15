@@ -85,6 +85,7 @@ do_start() {
 					fi
 				fi
 				if [ "$BOARDMODEL" = "ISEE IGEP SMARC AM3352 Lite Kit" ]; then
+					clear > /dev/ttyO0
 					exec sh -c "${PYTHONBIN} ${TESTSUITE}/board_igep0034.py LITE" >/dev/ttyO0 2>&1 || status=$?
 					exit ${status};
 				fi
