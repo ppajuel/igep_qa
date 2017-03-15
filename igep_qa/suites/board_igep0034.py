@@ -96,7 +96,6 @@ def testsuite_IGEP0034():
         - Test Button Fbtest : Read User button action and display fb-test pattern
         - Test Power : Check the maximum acceptable limit of current
         - Test TPS65910: Check for PMIC in bus 1 at address 0x2d
-        - Test TPS65910 RTC: Check for PMIC RTC is active (RTC_STATUS_REG:RUN bit)
         - Test EEPROM: Check for PMIC in bus 1 at address 0x50
         - Test Audio : Loopback, sound sent to audio-out should return in audio-in
         - Test Serial : ttyO0 Each sent character should return
@@ -110,13 +109,14 @@ def testsuite_IGEP0034():
         - Test WiFi : Ping the IP address of a remote host (adhoc+wep)
         - Test Bluetooth : Get Link Manager Protocol (LMP) revision
         - Test ubifsfirmware : Read some files from UBIFS partition to ensure firmware flashed
-        - Test ADC: get  AIN0-AIN6 values
         - Test SD-card : Test is running from SD-card (implicit)
         - Test HDMI : Test shows the test result (implicit)
 
     What is NOT tested?
         - Gigabit Ethernet
         - CAN bus
+        - Test ADC: get  AIN0-AIN6 values
+        - Test TPS65910 RTC: Check for PMIC RTC is active (RTC_STATUS_REG:RUN bit)
 
     """
     # parse testsuite.conf configuration file
