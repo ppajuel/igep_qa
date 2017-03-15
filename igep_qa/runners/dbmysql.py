@@ -9,6 +9,7 @@ import ConfigParser
 import commands
 import sys
 import unittest
+import time
 
 import mysql.connector
 from mysql.connector import errorcode
@@ -76,6 +77,9 @@ def updatedb(tests):
     retval = commands.getstatusoutput("ifconfig %s %s" % (interface, ipaddr))
     if retval[0] != 0:
         return -1
+
+    # Use a small delay to be sure the interface is up
+    time.sleep(1)
 
     # connection to the database
     try:
