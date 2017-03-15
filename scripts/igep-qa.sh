@@ -84,7 +84,10 @@ do_start() {
 						echo "${NAME}: Error /usr/bin/fb-test is not found. Aborted IGEP0034 (FULL) test."
 					fi
 				fi
-				# TODO: ISEE IGEP SMARC AM3352 Lite Kit
+				if [ "$BOARDMODEL" = "ISEE IGEP SMARC AM3352 Lite Kit" ]; then
+					exec sh -c "${PYTHONBIN} ${TESTSUITE}/board_igep0034.py LITE" >/dev/ttyO0 2>&1 || status=$?
+					exit ${status};
+				fi
 				;;
 		esac
 	done
