@@ -40,6 +40,8 @@ class TestButton(unittest.TestCase):
             retval = commands.getstatusoutput("clear > /dev/tty0")
             self.failUnless(retval[0] == 0, "failed: Can't execute 'clear > /dev/tty0'")
 
+            self._testMethodDoc = "Test Button Fbtest : Read User button action and display fb-test pattern"
+
             retval = commands.getstatusoutput("echo '\033[37mTest Button Fbtest : Read User button action and display fb-test pattern: \033' > /dev/tty0")
             self.failUnless(retval[0] == 0, "failed: Can't execute 'echo'")
 
