@@ -23,6 +23,8 @@ from igep_qa.helpers.omap import omap3_get_dieid, omap5_get_dieid
 from igep_qa.helpers.omap import machine_is_igep0020
 from igep_qa.helpers.omap import machine_is_igep0030
 from igep_qa.helpers.omap import machine_is_igep0032
+from igep_qa.helpers.imx6 import cpu_is_imx6
+from igep_qa.helpers.imx6 import imx6_get_unique_id
 
 PASS = '\033[32mPASS\033[0m\n'
 FAIL = '\033[31mFAIL\033[0m\n'
@@ -123,6 +125,11 @@ def updatedb(tests):
                 "(datetime, of, sn, dieid, mac) "
                 " VALUES (NOW(), %s, %s, %s, %s)")
             data_testsuite = (num, snnum, am335x_get_mac_id0(), am335x_get_mac_id1())
+        elif cpu_is_imx6():
+            add_testsuite = ("INSERT INTO testsuite"
+                "(datetime, of, sn, dieid, mac) "
+                " VALUES (NOW(), %s, %s, %s, %s)")
+            data_testsuite = (num, snnum, imx6_get_unique_id(), '')
         elif cpu_is_omap5():
             add_testsuite = ("INSERT INTO testsuite"
                 "(datetime, of, dieid, mac) "

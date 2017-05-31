@@ -16,6 +16,12 @@ GPIOLIB
 .. automodule:: igep_qa.helpers.gpiolib
    :members:
 
+i.MX6
+-------
+
+.. automodule:: igep_qa.helpers.imx6
+   :members:
+
 MADC
 ----
 

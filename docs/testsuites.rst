@@ -26,6 +26,12 @@ IGEP0034
 .. automodule:: igep_qa.suites.board_igep0034
    :members:
 
+IGEP0046
+--------
+
+.. automodule:: igep_qa.suites.board_igep0046
+   :members:
+
 IGEP0050
 --------
 
