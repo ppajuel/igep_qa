@@ -14,6 +14,7 @@ from igep_qa.tests.qpower import TestPower
 from igep_qa.tests.qserial import TestSerial
 from igep_qa.tests.qaudio import TestAudio
 from igep_qa.tests.qi2c import TestI2C
+from igep_qa.tests.qstorage import TestBlockStorage
 
 # For every test suite we create an instance of TestSuite and add test case
 # instances. When all tests have been added, the suite can be passed to a test
@@ -76,6 +77,10 @@ def testsuite_IGEP0046_QuadC2():
         - Test MMPF0100F0A: Check for PMIC in bus 1 at address 0x08 and register 0x00
         - Test TLV320AIC3106: Check for Expansion audio codec in bus 2 at address 0x1b
         - Test EEPROM: Check for EEPROM in bus 2 at address 0x50
+        - Test USB HOST -1.1:1.0 : Check for this_is_an_storage_device file
+        - Test USB HOST -1.2:1.0 : Check for this_is_an_storage_device file
+        - Test USB HOST -1.3:1.0 : Check for this_is_an_storage_device file
+        - Test USB OTG 1-1:1.0: Check for this_is_an_storage_device file
         - Test SD-card : Test is running from SD-card (implicit)
         - Test HDMI : Test shows the test result (implicit)
 
@@ -93,7 +98,7 @@ def testsuite_IGEP0046_QuadC2():
                             config.get('default', 'serverip'),
                             'eth0'))
     suite.addTest(TestPower('test_max_current',
-                            0.55,
+                            0.70,
                             config.get('default', 'ipaddr'),
                             config.get('default', 'serverip'),
                             9999,
@@ -107,6 +112,14 @@ def testsuite_IGEP0046_QuadC2():
         'Test TLV320AIC3106: Check for Expansion audio codec in bus 2 at address 0x1b'))
     suite.addTest(TestI2C('test_i2cdetect', 2, '0x50',
         'Test EEPROM: Check for EEPROM in bus 2 at address 0x50'))
+    suite.addTest(TestBlockStorage('test_storage_device', '-1.1:1.0',
+        'Test USB HOST -1.1:1.0: Check for this_is_an_storage_device file'))
+    suite.addTest(TestBlockStorage('test_storage_device', '-1.2:1.0',
+        'Test USB HOST -1.2:1.0: Check for this_is_an_storage_device file'))
+    suite.addTest(TestBlockStorage('test_storage_device', '-1.3:1.0',
+        'Test USB HOST -1.3:1.0: Check for this_is_an_storage_device file'))
+    suite.addTest(TestBlockStorage('test_storage_device', 'usb1/1-1/1-1:1.0',
+        'Test USB OTG 1-1:1.0: Check for this_is_an_storage_device file'))
 
     return suite
 
@@ -158,6 +171,10 @@ def testsuite_IGEP0034_DualLiteD102():
         - Test Serial : ttymxc0 Each sent character should return
         - Test Serial : ttymxc1 Each sent character should return
         - Test Serial : ttymxc3 Each sent character should return
+        - Test USB HOST -1.1:1.0 : Check for this_is_an_storage_device file
+        - Test USB HOST -1.2:1.0 : Check for this_is_an_storage_device file
+        - Test USB HOST -1.3:1.0 : Check for this_is_an_storage_device file
+        - Test USB OTG 1-1:1.0: Check for this_is_an_storage_device file
         - Test SD-card : Test is running from SD-card (implicit)
         - Test HDMI : Test shows the test result (implicit)
 
@@ -175,7 +192,7 @@ def testsuite_IGEP0034_DualLiteD102():
                             config.get('default', 'serverip'),
                             'eth0'))
     suite.addTest(TestPower('test_max_current',
-                            0.55,
+                            0.70,
                             config.get('default', 'ipaddr'),
                             config.get('default', 'serverip'),
                             9999,
@@ -184,6 +201,14 @@ def testsuite_IGEP0034_DualLiteD102():
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc0"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc1"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc3"))
+    suite.addTest(TestBlockStorage('test_storage_device', '-1.1:1.0',
+        'Test USB HOST -1.1:1.0: Check for this_is_an_storage_device file'))
+    suite.addTest(TestBlockStorage('test_storage_device', '-1.2:1.0',
+        'Test USB HOST -1.2:1.0: Check for this_is_an_storage_device file'))
+    suite.addTest(TestBlockStorage('test_storage_device', '-1.3:1.0',
+        'Test USB HOST -1.3:1.0: Check for this_is_an_storage_device file'))
+    suite.addTest(TestBlockStorage('test_storage_device', 'usb1/1-1/1-1:1.0',
+        'Test USB OTG 1-1:1.0: Check for this_is_an_storage_device file'))
 
     return suite
 
