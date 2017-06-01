@@ -87,7 +87,8 @@ def testsuite_IGEP0046_QuadC2():
         - Test HDMI : Test shows the test result (implicit)
 
     What is NOT tested?
-        - CAN bus
+        - CAN busses
+        - 485
 
     """
     # parse testsuite.conf configuration file
@@ -186,7 +187,7 @@ def testsuite_IGEP0034_DualLiteD102():
         - Test HDMI : Test shows the test result (implicit)
 
     What is NOT tested?
-        - CAN bus
+        - CAN busses
 
     """
     # parse testsuite.conf configuration file
