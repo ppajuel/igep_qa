@@ -11,6 +11,8 @@ from igep_qa.helpers import imx6
 # Test Cases
 from igep_qa.tests.qnetwork import TestNetwork
 from igep_qa.tests.qpower import TestPower
+from igep_qa.tests.qserial import TestSerial
+from igep_qa.tests.qaudio import TestAudio
 
 # For every test suite we create an instance of TestSuite and add test case
 # instances. When all tests have been added, the suite can be passed to a test
@@ -67,6 +69,11 @@ def testsuite_IGEP0046_QuadC2():
     What is tested?
         - Test Power : Check the maximum acceptable limit of current
         - Test Network (eth0) : Ping the IP address of a remote host
+        - Test Audio : Loopback, sound sent to audio-out should return in audio-in
+        - Test Serial : ttymxc1 Each sent character should return
+        - Test Serial : ttymxc3 Each sent character should return
+        - Test SD-card : Test is running from SD-card (implicit)
+        - Test HDMI : Test shows the test result (implicit)
 
     What is NOT tested?
         - CAN bus
@@ -87,6 +94,9 @@ def testsuite_IGEP0046_QuadC2():
                             config.get('default', 'serverip'),
                             9999,
                             'eth0'))
+    suite.addTest(TestAudio('test_audio_loopback'))
+    suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc1"))
+    suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc3"))
 
     return suite
 
@@ -134,6 +144,12 @@ def testsuite_IGEP0034_DualLiteD102():
     What is tested?
         - Test Power : Check the maximum acceptable limit of current
         - Test Network (eth0) : Ping the IP address of a remote host
+        - Test Audio : Loopback, sound sent to audio-out should return in audio-in
+        - Test Serial : ttymxc0 Each sent character should return
+        - Test Serial : ttymxc1 Each sent character should return
+        - Test Serial : ttymxc3 Each sent character should return
+        - Test SD-card : Test is running from SD-card (implicit)
+        - Test HDMI : Test shows the test result (implicit)
 
     What is NOT tested?
         - CAN bus
@@ -154,6 +170,10 @@ def testsuite_IGEP0034_DualLiteD102():
                             config.get('default', 'serverip'),
                             9999,
                             'eth0'))
+    suite.addTest(TestAudio('test_audio_loopback'))
+    suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc0"))
+    suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc1"))
+    suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc3"))
 
     return suite
 
