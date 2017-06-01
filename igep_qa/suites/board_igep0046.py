@@ -13,6 +13,7 @@ from igep_qa.tests.qnetwork import TestNetwork
 from igep_qa.tests.qpower import TestPower
 from igep_qa.tests.qserial import TestSerial
 from igep_qa.tests.qaudio import TestAudio
+from igep_qa.tests.qi2c import TestI2C
 
 # For every test suite we create an instance of TestSuite and add test case
 # instances. When all tests have been added, the suite can be passed to a test
@@ -72,6 +73,9 @@ def testsuite_IGEP0046_QuadC2():
         - Test Audio : Loopback, sound sent to audio-out should return in audio-in
         - Test Serial : ttymxc1 Each sent character should return
         - Test Serial : ttymxc3 Each sent character should return
+        - Test MMPF0100F0A: Check for PMIC in bus 1 at address 0x08 and register 0x00
+        - Test TLV320AIC3106: Check for Expansion audio codec in bus 2 at address 0x1b
+        - Test EEPROM: Check for EEPROM in bus 2 at address 0x50
         - Test SD-card : Test is running from SD-card (implicit)
         - Test HDMI : Test shows the test result (implicit)
 
@@ -97,6 +101,12 @@ def testsuite_IGEP0046_QuadC2():
     suite.addTest(TestAudio('test_audio_loopback'))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc1"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc3"))
+    suite.addTest(TestI2C('test_i2cget', 1, '0x08', '0x00',
+        'Test MMPF0100F0A: Check for PMIC in bus 1 at address 0x08 and register 0x00'))
+    suite.addTest(TestI2C('test_i2cdetect', 2, '0x1b',
+        'Test TLV320AIC3106: Check for Expansion audio codec in bus 2 at address 0x1b'))
+    suite.addTest(TestI2C('test_i2cdetect', 2, '0x50',
+        'Test EEPROM: Check for EEPROM in bus 2 at address 0x50'))
 
     return suite
 
