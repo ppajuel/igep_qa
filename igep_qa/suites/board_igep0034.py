@@ -96,7 +96,7 @@ def testsuite_IGEP0034():
         - Test Button Fbtest : Read User button action and display fb-test pattern
         - Test Power : Check the maximum acceptable limit of current
         - Test TPS65910: Check for PMIC in bus 1 at address 0x2d
-        - Test EEPROM: Check for PMIC in bus 1 at address 0x50
+        - Test EEPROM: Check for EEPROM in bus 1 at address 0x50
         - Test Audio : Loopback, sound sent to audio-out should return in audio-in
         - Test Serial : ttyO0 Each sent character should return
         - Test Serial : ttyO3 Each sent character should return
@@ -138,7 +138,7 @@ def testsuite_IGEP0034():
     suite.addTest(TestI2C('test_i2cdetect', 1, '0x2d',
         'Test TPS65910: Check for PMIC in bus 1 at address 0x2d'))
     suite.addTest(TestI2C('test_i2cdetect', 1, '0x50',
-        'Test EEPROM: Check for PMIC in bus 1 at address 0x50'))
+        'Test EEPROM: Check for EEPROM in bus 1 at address 0x50'))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttyO0"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttyO3"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttyO5"))
@@ -229,7 +229,7 @@ def testsuite_IGEP0034_LITE():
         - Test Button : Read User button action
         - Test Power : Check the maximum acceptable limit of current
         - Test TPS65910: Check for PMIC in bus 1 at address 0x2d
-        - Test EEPROM: Check for PMIC in bus 1 at address 0x50
+        - Test EEPROM: Check for EEPROM in bus 1 at address 0x50
         - Test Audio : Loopback, sound sent to audio-out should return in audio-in
         - Test Serial : ttyO3 Each sent character should return
         - Test Serial : ttyO5 Each sent character should return
@@ -270,7 +270,7 @@ def testsuite_IGEP0034_LITE():
     suite.addTest(TestI2C('test_i2cdetect', 1, '0x2d',
         'Test TPS65910: Check for PMIC in bus 1 at address 0x2d'))
     suite.addTest(TestI2C('test_i2cdetect', 1, '0x50',
-        'Test EEPROM: Check for PMIC in bus 1 at address 0x50'))
+        'Test EEPROM: Check for EEPROM in bus 1 at address 0x50'))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttyO3"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttyO5"))
     suite.addTest(TestBlockStorage('test_storage_device', 'usb2/2-1/2-1.1',
