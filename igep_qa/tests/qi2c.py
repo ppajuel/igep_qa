@@ -22,10 +22,11 @@ class TestI2C(unittest.TestCase):
 
     """
 
-    def __init__(self, testname, i2cbus, address, testdescription=''):
+    def __init__(self, testname, i2cbus, address, register='', testdescription=''):
         super(TestI2C, self).__init__(testname)
         self.i2cbus = i2cbus
         self.address = address
+        self.register = register
         # Overwrite test description
         if testdescription:
             self._testMethodDoc = testdescription
@@ -44,3 +45,18 @@ class TestI2C(unittest.TestCase):
         self.failUnless(retval[0] == 0,
                         'failed: No device detected at I2C bus %s address %s'
                          % (self.i2cbus, self.address))
+
+    def test_i2cget(self):
+        """ Test I2C : Get I2C register from I2C bus at address.
+
+        Type: Functional
+
+        Description:
+            Reads a register to check I2C device.
+
+        """
+        retval = commands.getstatusoutput('i2cget -f -y %s %s %s'
+                                          % (self.i2cbus, self.address, self.register))
+        self.failUnless(retval[0] == 0,
+                        'failed: Cannot read at I2C bus %s address and %s register %s'
+                         % (self.i2cbus, self.address, self.register))
