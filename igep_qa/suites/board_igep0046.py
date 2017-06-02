@@ -16,6 +16,7 @@ from igep_qa.tests.qaudio import TestAudio
 from igep_qa.tests.qi2c import TestI2C
 from igep_qa.tests.qstorage import TestBlockStorage
 from igep_qa.tests.qwifi import TestWiFi
+from igep_qa.tests.qbutton import TestButton
 
 # For every test suite we create an instance of TestSuite and add test case
 # instances. When all tests have been added, the suite can be passed to a test
@@ -70,6 +71,7 @@ def testsuite_IGEP0046_QuadC2():
         ln -sf /usr/bin/igep-qa.sh /etc/rc5.d/S99igep-qa.sh
 
     What is tested?
+        - Test Button : Read User button action
         - Test Power : Check the maximum acceptable limit of current
         - Test Network (eth0) : Ping the IP address of a remote host
         - Test Audio : Loopback, sound sent to audio-out should return in audio-in
@@ -96,6 +98,7 @@ def testsuite_IGEP0046_QuadC2():
     config.read('/etc/testsuite.conf')
     # create test suite
     suite = unittest.TestSuite()
+    suite.addTest(TestButton("test_button", 155))
     suite.addTest(TestNetwork("test_ping_host",
                             config.get('default', 'ipaddr'),
                             config.get('default', 'serverip'),
@@ -173,6 +176,7 @@ def testsuite_IGEP0034_DualLiteD102():
         ln -sf /usr/bin/igep-qa.sh /etc/rc5.d/S99igep-qa.sh
 
     What is tested?
+        - Test Button : Read User button action
         - Test Power : Check the maximum acceptable limit of current
         - Test Network (eth0) : Ping the IP address of a remote host
         - Test Audio : Loopback, sound sent to audio-out should return in audio-in
@@ -195,6 +199,7 @@ def testsuite_IGEP0034_DualLiteD102():
     config.read('/etc/testsuite.conf')
     # create test suite
     suite = unittest.TestSuite()
+    suite.addTest(TestButton("test_button", 155))
     suite.addTest(TestNetwork("test_ping_host",
                             config.get('default', 'ipaddr'),
                             config.get('default', 'serverip'),
