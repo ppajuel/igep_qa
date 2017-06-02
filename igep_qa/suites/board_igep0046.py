@@ -62,7 +62,7 @@ def testsuite_IGEP0046_QuadC2():
 
     .. code-block:: ini
 
-        mmcargs=setenv bootargs console=${console},${baudrate} consoleblank=0 autotest=IGEP0046 quiet root=${mmcroot} ${video_args}
+        mmcargs=setenv bootargs console=${console},${baudrate} consoleblank=0 autotest=IGEP0046 quiet root=${mmcroot} video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24 video=mxcfb1:dev=ldb,1280x720M@60,if=RGB24
 
     If you want to pass test during bootup, you need to add a symbolic link to igep-qa.sh
 
@@ -167,7 +167,7 @@ def testsuite_IGEP0034_DualLiteD102():
 
     .. code-block:: ini
 
-        mmcargs=setenv bootargs console=${console},${baudrate} consoleblank=0 autotest=IGEP0046 quiet root=${mmcroot} ${video_args}
+        mmcargs=setenv bootargs console=${console},${baudrate} consoleblank=0 autotest=IGEP0046 quiet root=${mmcroot} video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24 video=mxcfb1:dev=ldb,1280x720M@60,if=RGB24
 
     If you want to pass test during bootup, you need to add a symbolic link to igep-qa.sh
 
