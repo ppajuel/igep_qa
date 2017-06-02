@@ -17,6 +17,7 @@ from igep_qa.tests.qi2c import TestI2C
 from igep_qa.tests.qstorage import TestBlockStorage
 from igep_qa.tests.qwifi import TestWiFi
 from igep_qa.tests.qbutton import TestButton
+from igep_qa.tests.qflash import TestFlash
 
 # For every test suite we create an instance of TestSuite and add test case
 # instances. When all tests have been added, the suite can be passed to a test
@@ -85,6 +86,8 @@ def testsuite_IGEP0046_QuadC2():
         - Test USB HOST -1.3:1.0 : Check for this_is_an_storage_device file
         - Test USB OTG 1-1:1.0: Check for this_is_an_storage_device file
         - Test WiFi : Ping the IP address of a remote host (adhoc+wep)
+        - Test firmware : Read some files from mounted partition to ensure firmware flashed (boot partition)
+        - Test firmware : Read some files from mounted partition to ensure firmware flashed (rootfs partition)
         - Test SD-card : Test is running from SD-card (implicit)
         - Test HDMI : Test shows the test result (implicit)
 
@@ -131,6 +134,11 @@ def testsuite_IGEP0046_QuadC2():
                             config.get('wireless', 'essid'),
                             config.get('wireless', 'ipaddr'),
                             config.get('wireless', 'password')))
+    suite.addTest(TestFlash('test_firmware', '/run/media/mmcblk2p1',
+        '/zImage'))
+    suite.addTest(TestFlash('test_firmware', '/run/media/mmcblk2p2',
+        '/boot/zImage',
+        '/boot/u-boot.imx'))
 
     return suite
 
@@ -187,6 +195,8 @@ def testsuite_IGEP0034_DualLiteD102():
         - Test USB HOST -1.2:1.0 : Check for this_is_an_storage_device file
         - Test USB HOST -1.3:1.0 : Check for this_is_an_storage_device file
         - Test USB OTG 1-1:1.0: Check for this_is_an_storage_device file
+        - Test firmware : Read some files from mounted partition to ensure firmware flashed (boot partition)
+        - Test firmware : Read some files from mounted partition to ensure firmware flashed (rootfs partition)
         - Test SD-card : Test is running from SD-card (implicit)
         - Test HDMI : Test shows the test result (implicit)
 
@@ -222,6 +232,11 @@ def testsuite_IGEP0034_DualLiteD102():
         'Test USB HOST -1.3:1.0: Check for this_is_an_storage_device file'))
     suite.addTest(TestBlockStorage('test_storage_device', 'usb1/1-1/1-1:1.0',
         'Test USB OTG 1-1:1.0: Check for this_is_an_storage_device file'))
+    suite.addTest(TestFlash('test_firmware', '/run/media/mmcblk2p1',
+        '/zImage'))
+    suite.addTest(TestFlash('test_firmware', '/run/media/mmcblk2p2',
+        '/boot/zImage',
+        '/boot/u-boot.imx'))
 
     return suite
 
