@@ -68,6 +68,29 @@ class TestFlash(unittest.TestCase):
         retval = os.access((mountdirectory + self.file3), os.R_OK)
         self.failUnless(retval == 1, "failed: Seems that file '%s' doesn't exists" % (mountdirectory + self.file3))
 
+    def test_firmware(self):
+        """ Test firmware : Read some files from mounted partition to ensure firmware flashed
+
+        Type: Functional
+
+        Prerequisite recipes:
+            - udev-extraconf
+
+        Description:
+            The main goal of this test is detect if firmware has been flashed into onboard memory.
+            To achieve it, test firmware reads some files recorded.
+
+        """
+        #  Test the readability of file1
+        retval = os.access((self.dev_partition + self.file1), os.R_OK)
+        self.failUnless(retval == 1, "failed: Seems that file '%s' doesn't exists" % (self.dev_partition + self.file1))
+        #  Test the readability of file2
+        retval = os.access((self.dev_partition + self.file2), os.R_OK)
+        self.failUnless(retval == 1, "failed: Seems that file '%s' doesn't exists" % (self.dev_partition + self.file2))
+        #  Test the readability of file3
+        retval = os.access((self.dev_partition + self.file3), os.R_OK)
+        self.failUnless(retval == 1, "failed: Seems that file '%s' doesn't exists" % (self.dev_partition + self.file3))
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)
 
