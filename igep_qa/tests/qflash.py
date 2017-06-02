@@ -14,11 +14,11 @@ class TestFlash(unittest.TestCase):
 
     Keyword arguments:
         - testname:  The name of the test to be executed.
-        - mtd_partition: The mtd device, e.g. /dev/mtd1
+        - dev_partition: Partition path, e.g. /dev/mtd1 or /run/media/mmcblk2p2
     """
-    def __init__(self, testname, mtd_partition, file1="", file2="", file3=""):
+    def __init__(self, testname, dev_partition, file1="", file2="", file3=""):
         super(TestFlash, self).__init__(testname)
-        self.mtd_partition = mtd_partition
+        self.dev_partition = dev_partition
         self.file1 = file1
         self.file2 = file2
         self.file3 = file3
@@ -38,7 +38,7 @@ class TestFlash(unittest.TestCase):
             readed value is the same.
 
         """
-        retval = commands.getstatusoutput("nandtest " + self.mtd_partition + " -k -l 0xE0000")
+        retval = commands.getstatusoutput("nandtest " + self.dev_partition + " -k -l 0xE0000")
         self.failUnless(retval[0] == 0, "error: Failed writting nand")
 
     def test_ubifsfirmware(self):
@@ -53,7 +53,7 @@ class TestFlash(unittest.TestCase):
         """
         #  Mount UBIFS partition to mountdirectory
         mountdirectory = '/tmp/UBIFS'
-        retval = commands.getstatusoutput("ubiattach -p %s" % self.mtd_partition)
+        retval = commands.getstatusoutput("ubiattach -p %s" % self.dev_partition)
         self.failUnless(retval[0] == 0, "error: Failed to attach UBIFS partition")
         retval = commands.getstatusoutput("mkdir %s" % mountdirectory)
         retval = commands.getstatusoutput("mount -t ubifs ubi0:filesystem %s" % mountdirectory)
