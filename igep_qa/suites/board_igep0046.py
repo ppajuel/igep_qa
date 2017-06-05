@@ -85,6 +85,7 @@ def testsuite_IGEP0046_QuadC2():
         - Test USB HOST -1.2:1.0 : Check for this_is_an_storage_device file
         - Test USB HOST -1.3:1.0 : Check for this_is_an_storage_device file
         - Test USB OTG 1-1:1.0: Check for this_is_an_storage_device file
+        - Test SATA .sata/ata1: Check for this_is_an_storage_device file
         - Test WiFi : Ping the IP address of a remote host (adhoc+wep)
         - Test firmware : Read some files from mounted partition to ensure firmware flashed (boot partition)
         - Test firmware : Read some files from mounted partition to ensure firmware flashed (rootfs partition)
@@ -107,7 +108,7 @@ def testsuite_IGEP0046_QuadC2():
                             config.get('default', 'serverip'),
                             'eth0'))
     suite.addTest(TestPower('test_max_current',
-                            0.70,
+                            0.75,
                             config.get('default', 'ipaddr'),
                             config.get('default', 'serverip'),
                             9999,
@@ -129,6 +130,8 @@ def testsuite_IGEP0046_QuadC2():
         'Test USB HOST -1.3:1.0: Check for this_is_an_storage_device file'))
     suite.addTest(TestBlockStorage('test_storage_device', 'usb1/1-1/1-1:1.0',
         'Test USB OTG 1-1:1.0: Check for this_is_an_storage_device file'))
+    suite.addTest(TestBlockStorage('test_storage_device', '.sata/ata1',
+        'Test SATA .sata/ata1: Check for this_is_an_storage_device file'))
     suite.addTest(TestWiFi("test_ap_with_wep_encryption",
                             config.get('wireless', 'serverip'),
                             config.get('wireless', 'essid'),
