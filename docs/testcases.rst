@@ -62,6 +62,12 @@ HWMON
 .. automodule:: igep_qa.tests.qhwmon
    :members:
 
+I2C
+-----
+
+.. automodule:: igep_qa.tests.qi2c
+   :members:
+
 Modem
 -----
 
