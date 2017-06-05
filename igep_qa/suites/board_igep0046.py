@@ -72,7 +72,7 @@ def testsuite_IGEP0046_QuadC2():
         ln -sf /usr/bin/igep-qa.sh /etc/rc5.d/S99igep-qa.sh
 
     What is tested?
-        - Test Button : Read User button action
+        - Test Button Fbtest : Read User button action and display fb-test pattern
         - Test Power : Check the maximum acceptable limit of current
         - Test Network (eth0) : Ping the IP address of a remote host
         - Test Audio : Loopback, sound sent to audio-out should return in audio-in
@@ -101,7 +101,7 @@ def testsuite_IGEP0046_QuadC2():
     config.read('/etc/testsuite.conf')
     # create test suite
     suite = unittest.TestSuite()
-    suite.addTest(TestButton("test_button", 155))
+    suite.addTest(TestButton("test_button_fbtest", 155))
     suite.addTest(TestNetwork("test_ping_host",
                             config.get('default', 'ipaddr'),
                             config.get('default', 'serverip'),

@@ -126,24 +126,25 @@ do_start() {
 				fi
 				;;
 			autotest=IGEP0046)
+				# Clear the tty0 terminal
+				reset > /dev/tty0
 				read BOARDMODEL < /proc/device-tree/model
 				if [ "$BOARDMODEL" = "ISEE IGEP i.MX6 Quad SMARC Kit Rev C2" ]; then
-					# fb-test is a dependency for IGEP0046 test
-					if [ -f /usr/bin/fb-test ]; then
+					# /usr/bin/gst-launch is a dependency for IGEP0046 test
+					if [ -f /usr/bin/gst-launch ]; then
+						# Enable DVI fb-test pattern
+						/bin/echo 0 > /sys/class/graphics/fb2/blank
+						/usr/bin/gst-launch filesrc location=/usr/igep_qa/contrib/fb-test-720p.png ! pngdec ! ffmpegcolorspace ! freeze ! imxv4l2sink device=/dev/video19 &
+
 						exec sh -c "${PYTHONBIN} ${TESTSUITE}/board_igep0046.py QuadC2" >/dev/tty1 2>&1 || status=$?
 						exit ${status};
 					else
-						echo "${NAME}: Error /usr/bin/fb-test is not found. Aborted ${BOARDMODEL} test."
+						echo "${NAME}: Error /usr/bin/gst-launch is not found. Aborted ${BOARDMODEL} test."
 					fi
 				fi
 				if [ "$BOARDMODEL" = "ISEE IGEP i.MX6 DualLite SMARC Kit Rev D102" ]; then
-					# fb-test is a dependency for IGEP0046 test
-					if [ -f /usr/bin/fb-test ]; then
-						exec sh -c "${PYTHONBIN} ${TESTSUITE}/board_igep0046.py DualLiteD102" >/dev/tty1 2>&1 || status=$?
-						exit ${status};
-					else
-						echo "${NAME}: Error /usr/bin/fb-test is not found. Aborted ${BOARDMODEL} test."
-					fi
+					exec sh -c "${PYTHONBIN} ${TESTSUITE}/board_igep0046.py DualLiteD102" >/dev/tty1 2>&1 || status=$?
+					exit ${status};
 				fi
 				;;
 		esac
