@@ -15,6 +15,7 @@ class TestI2C(unittest.TestCase):
         - testname : The name of the test to be executed.
         - i2cbus : The I2C bus number.
         - address : The device I2C address (in hexadecimal)
+        - register : The device I2C register (in hexadecimal)
         - testdescription: Optional test description to overwrite the default.
 
     Prerequisite commands:
