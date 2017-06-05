@@ -11,6 +11,7 @@ import select
 import commands
 import time
 from igep_qa.helpers.gpiolib import QGpio
+from igep_qa.helpers.imx6 import cpu_is_imx6
 
 class TestButton(unittest.TestCase):
     """ Generic test for user button.
@@ -40,8 +41,16 @@ class TestButton(unittest.TestCase):
         """
 
         def exit_commands():
-            retval = commands.getstatusoutput("clear > /dev/tty0")
-            self.failUnless(retval[0] == 0, "failed: Can't execute 'clear > /dev/tty0'")
+            if cpu_is_imx6:
+                retval = commands.getstatusoutput("reset > /dev/tty0")
+                self.failUnless(retval[0] == 0, "failed: Can't execute 'reset > /dev/tty0'")
+                retval = commands.getstatusoutput("/bin/echo 1 > /sys/class/graphics/fb2/blank")
+                self.failUnless(retval[0] == 0, "failed: Can't execute /bin/echo 1 > /sys/class/graphics/fb2/blank")
+            else:
+                retval = commands.getstatusoutput("clear > /dev/tty0")
+                self.failUnless(retval[0] == 0, "failed: Can't execute 'clear > /dev/tty0'")
+
+            f.close();
 
             self._testMethodDoc = "Test Button Fbtest : Read User button action and display fb-test pattern"
 
@@ -70,8 +79,9 @@ class TestButton(unittest.TestCase):
             exit_commands()
             self.fail("Error timeout, unable to get first button press")
 
-        retval = commands.getstatusoutput("/usr/bin/fb-test")
-        self.failUnless(retval[0] == 0, "failed: Can't execute /usr/bin/fb-test")
+        if not cpu_is_imx6():
+            retval = commands.getstatusoutput("/usr/bin/fb-test")
+            self.failUnless(retval[0] == 0, "failed: Can't execute /usr/bin/fb-test")
 
         time.sleep(2)
         f.seek(0)
@@ -99,6 +109,8 @@ class TestButton(unittest.TestCase):
 
             retval = commands.getstatusoutput("echo '\033[37mTest Button : Read User button action:  \033' > /dev/ttyO0")
             self.failUnless(retval[0] == 0, "failed: Can't execute 'echo'")
+
+            f.close();
 
         self.gpio_in.set_direction("in")
         retval = self.gpio_in.get_direction()
