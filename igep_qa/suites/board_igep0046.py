@@ -18,6 +18,7 @@ from igep_qa.tests.qstorage import TestBlockStorage
 from igep_qa.tests.qwifi import TestWiFi
 from igep_qa.tests.qbutton import TestButton
 from igep_qa.tests.qflash import TestFlash
+from igep_qa.tests.qwatchdog import TestWatchdog
 
 # For every test suite we create an instance of TestSuite and add test case
 # instances. When all tests have been added, the suite can be passed to a test
@@ -72,6 +73,7 @@ def testsuite_IGEP0046_QuadC2():
         ln -sf /usr/bin/igep-qa.sh /etc/rc5.d/S99igep-qa.sh
 
     What is tested?
+        - Test IGEP0046 Watchdog : Check if device has been rebooted before
         - Test Button Fbtest : Read User button action and display fb-test pattern
         - Test Power : Check the maximum acceptable limit of current
         - Test Network (eth0) : Ping the IP address of a remote host
@@ -102,6 +104,7 @@ def testsuite_IGEP0046_QuadC2():
     config.read('/etc/testsuite.conf')
     # create test suite
     suite = unittest.TestSuite()
+    suite.addTest(TestWatchdog("test_igep0046_watchdog", '', 1, '0x08', '0x1C'))
     suite.addTest(TestButton("test_button_fbtest", 155))
     suite.addTest(TestNetwork("test_ping_host",
                             config.get('default', 'ipaddr'),
@@ -187,6 +190,7 @@ def testsuite_IGEP0034_DualLiteD102():
         ln -sf /usr/bin/igep-qa.sh /etc/rc5.d/S99igep-qa.sh
 
     What is tested?
+        - Test IGEP0046 Watchdog : Check if device has been rebooted before
         - Test Button : Read User button action
         - Test Power : Check the maximum acceptable limit of current
         - Test Network (eth0) : Ping the IP address of a remote host
@@ -212,6 +216,7 @@ def testsuite_IGEP0034_DualLiteD102():
     config.read('/etc/testsuite.conf')
     # create test suite
     suite = unittest.TestSuite()
+    suite.addTest(TestWatchdog("test_igep0046_watchdog", '', 1, '0x08', '0x1C'))
     suite.addTest(TestButton("test_button", 155))
     suite.addTest(TestNetwork("test_ping_host",
                             config.get('default', 'ipaddr'),
