@@ -45,8 +45,9 @@ class TestWatchdog(unittest.TestCase):
             Trigger watchdog counter and set a volatile magic number to
             PMIC volatile memory. Finally, parse reboot procedure.
 
-        NOTE: Test is not valid if a Coin cell battery is used.
+        .. warning::
 
+            Test is not valid if a Coin cell battery is used.
         """
 
         # Parse if IGEP0046 has rebooted before
