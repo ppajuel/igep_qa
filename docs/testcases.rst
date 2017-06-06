@@ -104,6 +104,12 @@ USB
 .. automodule:: igep_qa.tests.qusb
    :members:
 
+Watchdog
+----
+
+.. automodule:: igep_qa.tests.qwatchdog
+   :members:
+
 WiFi
 ----
 
