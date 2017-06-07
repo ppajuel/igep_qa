@@ -48,6 +48,9 @@ class TestWatchdog(unittest.TestCase):
         .. warning::
 
             Test is not valid if a Coin cell battery is used.
+            Test is only valid for IGEP0046.
+            To reduce test procedure time. Add this test at the beginning
+            of testsuite.
         """
 
         # Parse if IGEP0046 has rebooted before
