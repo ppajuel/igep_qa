@@ -118,6 +118,10 @@ def testsuite_IGEP0034():
         - Test ADC: get  AIN0-AIN6 values
         - Test TPS65910 RTC: Check for PMIC RTC is active (RTC_STATUS_REG:RUN bit)
 
+    .. warning::
+
+        IGEP0034-RA&BASE0040-RB needs an external 12 MHz 1V8
+        oscillator attached to J1003:22 to test audio correctly
     """
     # parse testsuite.conf configuration file
     config = ConfigParser.ConfigParser()
