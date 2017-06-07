@@ -23,9 +23,12 @@ class TestButton(unittest.TestCase):
         super(TestButton, self).__init__(testname)
         self.gpio_in = QGpio(gpio_in)
         if testname == "test_button_fbtest":
-            self._testMethodDoc = "\033[33m PLEASE, PRESS USER BUTTON (S1200) TO TEST IT. THEN, IF THE FOLLOWING IMAGE PATTERN IS CORRECT PRESS USER BUTTON AGAIN OR WAIT 30 SECONDS.\033\n[0m"
+            if cpu_is_imx6():
+                self._testMethodDoc = "\033[33mTest Button Fbtest : PLEASE, CAPTURE QR CODE AND PRESS USER BUTTON (S1200) TO TEST IT OR WAIT 30 SECONDS.\033\n[0m"
+            else:
+                self._testMethodDoc = "\033[33mPLEASE, PRESS USER BUTTON (S1200) TO TEST IT. THEN, IF THE FOLLOWING IMAGE PATTERN IS CORRECT PRESS USER BUTTON AGAIN OR WAIT 30 SECONDS.\033\n[0m"
         if testname == "test_button":
-            self._testMethodDoc = "\033[33m PLEASE, PRESS USER BUTTON (S1200) TO TEST IT OR WAIT 30 SECONDS.\033\n[0m"
+            self._testMethodDoc = "\033[33mTest Button : PLEASE, CAPTURE QR CODE AND PRESS USER BUTTON (S1200) TO TEST IT OR WAIT 30 SECONDS.\033\n[0m"
 
     def test_button_fbtest(self):
         """ Test Button Fbtest : Read User button action and display fb-test pattern
@@ -38,24 +41,27 @@ class TestButton(unittest.TestCase):
               has validated that fb-test pattern is correct, press again user button to
               finish and save test results.
 
+        .. warning::
+
+            For i.MX6, this test should be the last one. For the rest of boards,
+            it should be placed at the beginning of testsuite
         """
 
         def exit_commands():
-            if cpu_is_imx6:
-                retval = commands.getstatusoutput("reset > /dev/tty0")
-                self.failUnless(retval[0] == 0, "failed: Can't execute 'reset > /dev/tty0'")
-                retval = commands.getstatusoutput("/bin/echo 1 > /sys/class/graphics/fb2/blank")
-                self.failUnless(retval[0] == 0, "failed: Can't execute /bin/echo 1 > /sys/class/graphics/fb2/blank")
+            if cpu_is_imx6():
+                retval = commands.getstatusoutput("echo ' ' > /dev/tty0")
+                self.failUnless(retval[0] == 0, "failed: Can't execute 'echo'")
+                retval = commands.getstatusoutput("echo '\033[37mTest Button Fbtest : Test finished, result is \033' > /dev/tty0")
+                self.failUnless(retval[0] == 0, "failed: Can't execute 'echo'")
             else:
                 retval = commands.getstatusoutput("clear > /dev/tty0")
                 self.failUnless(retval[0] == 0, "failed: Can't execute 'clear > /dev/tty0'")
+                retval = commands.getstatusoutput("echo '\033[37mTest Button Fbtest : Read User button action and display fb-test pattern: \033' > /dev/tty0")
+                self.failUnless(retval[0] == 0, "failed: Can't execute 'echo'")
 
             f.close();
 
             self._testMethodDoc = "Test Button Fbtest : Read User button action and display fb-test pattern"
-
-            retval = commands.getstatusoutput("echo '\033[37mTest Button Fbtest : Read User button action and display fb-test pattern: \033' > /dev/tty0")
-            self.failUnless(retval[0] == 0, "failed: Can't execute 'echo'")
 
         self.gpio_in.set_direction("in")
         retval = self.gpio_in.get_direction()
@@ -79,11 +85,20 @@ class TestButton(unittest.TestCase):
             exit_commands()
             self.fail("Error timeout, unable to get first button press")
 
-        if not cpu_is_imx6():
+        if cpu_is_imx6():
+            retval = commands.getstatusoutput("echo ' ' > /dev/tty0")
+            self.failUnless(retval[0] == 0, "failed: Can't execute 'echo'")
+            retval = commands.getstatusoutput("echo '\033[33mTest Button Fbtest : PLEASE, PRESS USER BUTTON (S1200) TO ACCEPT DISPLAY PATTERN OR WAIT 30 SECONDS. \033' > /dev/tty0")
+            self.failUnless(retval[0] == 0, "failed: Can't execute 'echo'")
+        else:
             retval = commands.getstatusoutput("/usr/bin/fb-test")
             self.failUnless(retval[0] == 0, "failed: Can't execute /usr/bin/fb-test")
 
-        time.sleep(2)
+        if cpu_is_imx6():
+            time.sleep(1)
+        else:
+            time.sleep(2)
+
         f.seek(0)
         state_last = f.read()
         events = po.poll(30000)
