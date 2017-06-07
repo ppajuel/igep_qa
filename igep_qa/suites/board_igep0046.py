@@ -52,7 +52,7 @@ def testsuite_IGEP0046_QuadC2():
 
     .. code-block:: ini
 
-        autotest=IGEP0046 quiet
+        console=ttymxc2,3000000 autotest=IGEP0046 quiet
 
     And you can disable the console blank (screen saver) timeout adding into kernel parameters:
 
@@ -64,7 +64,7 @@ def testsuite_IGEP0046_QuadC2():
 
     .. code-block:: ini
 
-        mmcargs=setenv bootargs console=${console},${baudrate} consoleblank=0 autotest=IGEP0046 quiet root=${mmcroot} video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24 video=mxcfb1:dev=ldb,1280x720M@60,if=RGB24
+        mmcargs=setenv bootargs console=ttymxc2,3000000 consoleblank=0 autotest=IGEP0046 quiet root=${mmcroot} video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24 video=mxcfb1:dev=ldb,1280x720M@60,if=RGB24
 
     If you want to pass test during bootup, you need to add a symbolic link to igep-qa.sh
 
@@ -96,8 +96,10 @@ def testsuite_IGEP0046_QuadC2():
 
     What is NOT tested?
         - CAN busses
-        - 485
-
+        - RS485
+        - Bluetooth
+        - CSI Camera
+        - MIC IN
     """
     # parse testsuite.conf configuration file
     config = ConfigParser.ConfigParser()
@@ -105,13 +107,12 @@ def testsuite_IGEP0046_QuadC2():
     # create test suite
     suite = unittest.TestSuite()
     suite.addTest(TestWatchdog("test_igep0046_watchdog", '', 1, '0x08', '0x1C'))
-    suite.addTest(TestButton("test_button_fbtest", 155))
     suite.addTest(TestNetwork("test_ping_host",
                             config.get('default', 'ipaddr'),
                             config.get('default', 'serverip'),
                             'eth0'))
     suite.addTest(TestPower('test_max_current',
-                            0.75,
+                            1,
                             config.get('default', 'ipaddr'),
                             config.get('default', 'serverip'),
                             9999,
@@ -145,6 +146,7 @@ def testsuite_IGEP0046_QuadC2():
     suite.addTest(TestFlash('test_firmware', '/run/media/mmcblk2p2',
         '/boot/zImage',
         '/boot/u-boot.imx'))
+    suite.addTest(TestButton("test_button_fbtest", 155))
 
     return suite
 
@@ -169,7 +171,7 @@ def testsuite_IGEP0034_DualLiteD102():
 
     .. code-block:: ini
 
-        autotest=IGEP0046 quiet
+        console=ttymxc2,3000000 autotest=IGEP0046 quiet
 
     And you can disable the console blank (screen saver) timeout adding into kernel parameters:
 
@@ -181,7 +183,7 @@ def testsuite_IGEP0034_DualLiteD102():
 
     .. code-block:: ini
 
-        mmcargs=setenv bootargs console=${console},${baudrate} consoleblank=0 autotest=IGEP0046 quiet root=${mmcroot} video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24 video=mxcfb1:dev=ldb,1280x720M@60,if=RGB24
+        mmcargs=setenv bootargs console=ttymxc2,3000000 consoleblank=0 autotest=IGEP0046 quiet root=${mmcroot} video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24 video=mxcfb1:dev=ldb,1280x720M@60,if=RGB24
 
     If you want to pass test during bootup, you need to add a symbolic link to igep-qa.sh
 
@@ -209,7 +211,9 @@ def testsuite_IGEP0034_DualLiteD102():
 
     What is NOT tested?
         - CAN busses
-
+        - RS485
+        - CSI Camera
+        - MIC IN
     """
     # parse testsuite.conf configuration file
     config = ConfigParser.ConfigParser()
@@ -217,7 +221,6 @@ def testsuite_IGEP0034_DualLiteD102():
     # create test suite
     suite = unittest.TestSuite()
     suite.addTest(TestWatchdog("test_igep0046_watchdog", '', 1, '0x08', '0x1C'))
-    suite.addTest(TestButton("test_button", 155))
     suite.addTest(TestNetwork("test_ping_host",
                             config.get('default', 'ipaddr'),
                             config.get('default', 'serverip'),
@@ -245,6 +248,7 @@ def testsuite_IGEP0034_DualLiteD102():
     suite.addTest(TestFlash('test_firmware', '/run/media/mmcblk2p2',
         '/boot/zImage',
         '/boot/u-boot.imx'))
+    suite.addTest(TestButton("test_button", 155))
 
     return suite
 
