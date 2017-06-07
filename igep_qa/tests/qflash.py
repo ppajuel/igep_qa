@@ -15,13 +15,21 @@ class TestFlash(unittest.TestCase):
     Keyword arguments:
         - testname:  The name of the test to be executed.
         - dev_partition: Partition path, e.g. /dev/mtd1 or /run/media/mmcblk2p2
+        - file1: Optional, path from file1 stored into internal memory
+        - file2: Optional, path from file2 stored into internal memory
+        - file3: Optional, path from file3 stored into internal memory
+        - testdescription: Optional test description to overwrite the default
     """
-    def __init__(self, testname, dev_partition, file1="", file2="", file3=""):
+    def __init__(self, testname, dev_partition, file1='', file2='', file3='', testdescription=''):
         super(TestFlash, self).__init__(testname)
         self.dev_partition = dev_partition
         self.file1 = file1
         self.file2 = file2
         self.file3 = file3
+
+        # Overwrite test description
+        if testdescription:
+            self._testMethodDoc = testdescription
 
     def test_nandtest(self):
         """ Test nandtest : Write and read back random values
@@ -93,4 +101,3 @@ class TestFlash(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
-
