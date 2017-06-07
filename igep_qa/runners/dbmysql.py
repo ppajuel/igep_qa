@@ -81,7 +81,7 @@ def updatedb(tests):
         return -1
 
     # Use a small delay to be sure the interface is up
-    time.sleep(1)
+    time.sleep(3)
 
     # connection to the database
     try:
