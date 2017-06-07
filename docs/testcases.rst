@@ -62,6 +62,12 @@ HWMON
 .. automodule:: igep_qa.tests.qhwmon
    :members:
 
+I2C
+-----
+
+.. automodule:: igep_qa.tests.qi2c
+   :members:
+
 Modem
 -----
 
@@ -96,6 +102,12 @@ USB
 ---
 
 .. automodule:: igep_qa.tests.qusb
+   :members:
+
+Watchdog
+----
+
+.. automodule:: igep_qa.tests.qwatchdog
    :members:
 
 WiFi
