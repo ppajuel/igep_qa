@@ -301,7 +301,6 @@ def testsuite_IGEP0034_LITE():
 
 # The main program just runs the test suite in verbose mode
 if __name__ == '__main__':
-    # TODO : Set amixer configuration
     args = sys.argv[1:]
     # Do some things to prepare the test environment.
     am33xx.igep0034_set_headset_amixer_settings(0)
