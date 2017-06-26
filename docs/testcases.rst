@@ -63,7 +63,7 @@ HWMON
    :members:
 
 I2C
------
+---
 
 .. automodule:: igep_qa.tests.qi2c
    :members:
@@ -93,7 +93,7 @@ Serial
    :members:
 
 SYSFS
-------
+-----
 
 .. automodule:: igep_qa.tests.qsysfs
    :members:
@@ -105,7 +105,7 @@ USB
    :members:
 
 Watchdog
-----
+--------
 
 .. automodule:: igep_qa.tests.qwatchdog
    :members:
