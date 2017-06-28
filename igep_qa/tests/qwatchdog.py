@@ -78,4 +78,4 @@ class TestWatchdog(unittest.TestCase):
             time.sleep(20)
             retval = commands.getstatusoutput("echo '\033[37mTest IGEP0046 Watchdog : Reboot FAILED. Test cannot be executed \033' > /dev/tty0")
             self.failUnless(retval[0] == 0, "failed: Can't execute 'echo'")
-            raise Exception("Test IGEP0046 Watchdog : Reboot FAILED.")
+            self.fail("Error, reboot failed")
