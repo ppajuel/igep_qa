@@ -55,7 +55,7 @@ class QMadc:
         retval = struct.unpack("iiiL", retval)
         # check for status of conversion
         if retval[2] == -1:
-            raise Exception("Failed reading frommm analog-to-digital "
+            raise Exception("Failed reading from analog-to-digital "
                             "converter")
         return retval[3]
 
