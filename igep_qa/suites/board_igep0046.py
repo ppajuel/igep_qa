@@ -205,6 +205,9 @@ def testsuite_IGEP0034_DualLiteD102():
         - Test Serial : ttymxc0 Each sent character should return
         - Test Serial : ttymxc1 Each sent character should return
         - Test Serial : ttymxc3 Each sent character should return
+        - Test MMPF0100F0A: Check for PMIC in bus 1 at address 0x08 and register 0x00
+        - Test TLV320AIC3106: Check for Expansion audio codec in bus 2 at address 0x1b
+        - Test EEPROM: Check for EEPROM in bus 2 at address 0x50
         - Test USB HOST -1.1:1.0 : Check for this_is_an_storage_device file
         - Test USB HOST -1.2:1.0 : Check for this_is_an_storage_device file
         - Test USB HOST -1.3:1.0 : Check for this_is_an_storage_device file
@@ -240,6 +243,12 @@ def testsuite_IGEP0034_DualLiteD102():
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc0"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc1"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc3"))
+    suite.addTest(TestI2C('test_i2cget', 1, '0x08', '0x00',
+        'Test MMPF0100F0A: Check for PMIC in bus 1 at address 0x08 and register 0x00'))
+    suite.addTest(TestI2C('test_i2cdetect', 2, '0x1b', '',
+        'Test TLV320AIC3106: Check for Expansion audio codec in bus 2 at address 0x1b'))
+    suite.addTest(TestI2C('test_i2cdetect', 2, '0x50', '',
+        'Test EEPROM: Check for EEPROM in bus 2 at address 0x50'))
     suite.addTest(TestBlockStorage('test_storage_device', '-1.1:1.0',
         'Test USB HOST -1.1:1.0: Check for this_is_an_storage_device file'))
     suite.addTest(TestBlockStorage('test_storage_device', '-1.2:1.0',
