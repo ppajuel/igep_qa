@@ -68,7 +68,7 @@ class TestAudio(unittest.TestCase):
                            "/usr/igep_qa/contrib/dtmf.wav & arecord %s "
                            "-t wav -c 1 -r 8000 -f S16_LE -d 5 -v "
                            "/tmp/recorded.wav" % (self.device, self.device))
-        commands.getoutput("multimon -t wav -a DTMF recorded.wav | grep 'DTMF: 5'")
+
         retval = commands.getstatusoutput("multimon -t wav -a DTMF "
                                           "/tmp/recorded.wav | grep 'DTMF: 5'")
 
