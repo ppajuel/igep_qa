@@ -142,6 +142,19 @@ do_start() {
 						echo "${NAME}: Error /usr/bin/gst-launch is not found. Aborted ${BOARDMODEL} test."
 					fi
 				fi
+				if [ "$BOARDMODEL" = "ISEE IGEP i.MX6 Quad SMARC Kit Rev D102" ]; then
+					# /usr/bin/gst-launch is a dependency for IGEP0046 test
+					if [ -f /usr/bin/gst-launch ]; then
+						# Enable DVI fb-test pattern
+						/bin/echo 0 > /sys/class/graphics/fb2/blank
+						/usr/bin/gst-launch filesrc location=/usr/igep_qa/contrib/fb-test-720p.png ! pngdec ! ffmpegcolorspace ! freeze ! imxv4l2sink device=/dev/video19 &
+
+						exec sh -c "${PYTHONBIN} ${TESTSUITE}/board_igep0046.py QuadD102" >/dev/tty1 2>&1 || status=$?
+						exit ${status};
+					else
+						echo "${NAME}: Error /usr/bin/gst-launch is not found. Aborted ${BOARDMODEL} test."
+					fi
+				fi
 				if [ "$BOARDMODEL" = "ISEE IGEP i.MX6 DualLite SMARC Kit Rev D102" ]; then
 					exec sh -c "${PYTHONBIN} ${TESTSUITE}/board_igep0046.py DualLiteD102" >/dev/tty1 2>&1 || status=$?
 					exit ${status};
