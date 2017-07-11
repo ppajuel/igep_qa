@@ -77,7 +77,7 @@ def testsuite_IGEP0046_QuadC2():
         - Test Button Fbtest : Read User button action and display fb-test pattern
         - Test Power : Check the maximum acceptable limit of current
         - Test Network (eth0) : Ping the IP address of a remote host
-        - Test Audio : Loopback, sound sent to audio-out should return in audio-in
+        - Test Audio WORKAROUND: Loopback, sound sent to audio-out should return in audio-in
         - Test Serial : ttymxc1 Each sent character should return
         - Test Serial : ttymxc3 Each sent character should return
         - Test MMPF0100F0A: Check for PMIC in bus 1 at address 0x08 and register 0x00
@@ -117,7 +117,7 @@ def testsuite_IGEP0046_QuadC2():
                             config.get('default', 'serverip'),
                             9999,
                             'eth0'))
-    suite.addTest(TestAudio('test_audio_loopback'))
+    suite.addTest(TestAudio('test_audio_workaround_loopback'))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc1"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc3"))
     suite.addTest(TestI2C('test_i2cget', 1, '0x08', '0x00',
@@ -201,7 +201,7 @@ def testsuite_IGEP0046_DualLiteD102():
         - Test Button : Read User button action
         - Test Power : Check the maximum acceptable limit of current
         - Test Network (eth0) : Ping the IP address of a remote host
-        - Test Audio : Loopback, sound sent to audio-out should return in audio-in
+        - Test Audio WORKAROUND: Loopback, sound sent to audio-out should return in audio-in
         - Test Serial : ttymxc0 Each sent character should return
         - Test Serial : ttymxc1 Each sent character should return
         - Test Serial : ttymxc3 Each sent character should return
@@ -239,7 +239,7 @@ def testsuite_IGEP0046_DualLiteD102():
                             config.get('default', 'serverip'),
                             9999,
                             'eth0'))
-    suite.addTest(TestAudio('test_audio_loopback'))
+    suite.addTest(TestAudio('test_audio_workaround_loopback'))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc0"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc1"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc3"))
@@ -317,7 +317,7 @@ def testsuite_IGEP0046_QuadD102():
         - Test Button Fbtest : Read User button action and display fb-test pattern
         - Test Power : Check the maximum acceptable limit of current
         - Test Network (eth0) : Ping the IP address of a remote host
-        - Test Audio : Loopback, sound sent to audio-out should return in audio-in
+        - Test Audio WORKAROUND: Loopback, sound sent to audio-out should return in audio-in
         - Test Serial : ttymxc0 Each sent character should return
         - Test Serial : ttymxc1 Each sent character should return
         - Test Serial : ttymxc3 Each sent character should return
@@ -356,7 +356,7 @@ def testsuite_IGEP0046_QuadD102():
                             config.get('default', 'serverip'),
                             9999,
                             'eth0'))
-    suite.addTest(TestAudio('test_audio_loopback'))
+    suite.addTest(TestAudio('test_audio_workaround_loopback'))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc0"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc1"))
     suite.addTest(TestSerial("test_serial_loopback", "/dev/ttymxc3"))
