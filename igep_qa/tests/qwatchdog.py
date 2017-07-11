@@ -64,6 +64,8 @@ class TestWatchdog(unittest.TestCase):
             self.failUnless(retval[0] == 0, "failed: Can't execute 'reset > /dev/tty0'")
             retval = commands.getstatusoutput("echo '\033[37mTest IGEP0046 Watchdog : Board need to reboot to PASS test. Reboot on. WAIT. \033' > /dev/tty0")
             self.failUnless(retval[0] == 0, "failed: Can't execute 'echo'")
+            retval = commands.getstatusoutput("echo '\033[37mTest IGEP0046 Watchdog : If board does not reboot after 20 seconds. Test IGEP0046 Watchdog : FAIL. \033' > /dev/tty0")
+            self.failUnless(retval[0] == 0, "failed: Can't execute 'echo'")
             # Set magic number
             retval = commands.getstatusoutput('i2cset -f -y %s %s %s 0x89'
                                       % (self.i2cbus, self.address, self.register))
